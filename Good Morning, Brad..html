@@ -2414,7 +2414,9 @@
   function deleteSale(id) {
     const month = getMonthKey();
     allRevenue[month] = (allRevenue[month] || []).filter(s => s.id !== id);
-    saveRevenue(allRevenue);
+    if (!allRevenue[month].length) delete allRevenue[month];
+    localStorage.setItem(REV_KEY, JSON.stringify(allRevenue));
+    if (supaUser) supaDeleteRevenue(id);
     renderRevenue();
   }
 
