@@ -1791,7 +1791,17 @@
   // ── SUPABASE ──────────────────────────────────────────────────
   const SUPA_URL = 'https://tsxrlncokncwuyctcjop.supabase.co';
   const SUPA_KEY = 'sb_publishable_MdzWYbo3bvVvfv3jj-tYeg_3pArGPiu';
-  const supa = supabase.createClient(SUPA_URL, SUPA_KEY);
+  // Initialize Supabase with error handling
+  let supa = null;
+  try {
+    if (typeof supabase !== 'undefined') {
+      supa = supabase.createClient(SUPA_URL, SUPA_KEY);
+    } else {
+      console.error('Supabase library not loaded');
+    }
+  } catch(e) {
+    console.error('Supabase init error:', e);
+  }
   let supaUser = null;
 
   async function doLogin() {
@@ -1800,6 +1810,7 @@
     const errEl = document.getElementById('loginError');
     errEl.textContent = '';
     if (!email || !password) { errEl.textContent = 'Please enter your email and password.'; return; }
+    if (!supa) { errEl.textContent = 'Connection error. Please refresh and try again.'; return; }
     const { data, error } = await supa.auth.signInWithPassword({ email, password });
     if (error) { errEl.textContent = 'Invalid email or password.'; return; }
     supaUser = data.user;
@@ -1807,6 +1818,7 @@
   }
 
   async function checkAuth() {
+    if (!supa) { return; } // Stay on login screen if Supabase not loaded
     const { data } = await supa.auth.getSession();
     if (data.session) {
       supaUser = data.session.user;
