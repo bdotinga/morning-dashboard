@@ -1923,6 +1923,9 @@
     localStorage.removeItem('brad_tasks');
     localStorage.removeItem('brad_revenue');
     localStorage.removeItem('brad_calendar');
+    // Show loading state
+    const taskList = document.getElementById('taskList');
+    if (taskList) taskList.innerHTML = '<div class="empty-state" style="color:rgba(201,168,76,0.5);">Loading your data...</div>';
     initApp();
   }
 
@@ -2065,7 +2068,8 @@
       jarvisHistory = memory;
     }
 
-    renderAll();
+    // Small delay for mobile Safari DOM settlement
+    setTimeout(() => renderAll(), 100);
   }
 
   async function seedSupabaseTasks() {
