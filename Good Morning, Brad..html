@@ -3133,7 +3133,7 @@ GREETING RULES:
           <button class="cal-action-btn cal-edit-btn" onclick="editCalEvent('${dateStr}', ${ev.id})" title="Edit">✎</button>
           <button class="cal-action-btn cal-delete-btn" onclick="deleteCalEvent('${dateStr}', ${ev.id})" title="Delete">✕</button>` : '';
         item.innerHTML = `
-          <div class="cal-event-time">${fmtTime(ev.time) || '—'}</div>
+          <div class="cal-event-time">${fmtTime(ev.time) || '—'}${ev.endTime ? ' - ' + fmtTime(ev.endTime) : ''}</div>
           <div class="cal-event-info">
             <div class="cal-event-title">${ev.title}</div>
             ${ev.notes ? `<div class="cal-event-notes">${ev.notes}</div>` : ''}
@@ -3197,7 +3197,7 @@ GREETING RULES:
       events.slice(0, 3).forEach(ev => {
         const pill = document.createElement('div');
         pill.className = 'cal-event-pill' + (ev.type === 'task' ? ' task-event' : '');
-        pill.textContent = (ev.time ? fmtTime(ev.time) + ' ' : '') + ev.title;
+        pill.textContent = (ev.time ? fmtTime(ev.time) + (ev.endTime ? ' - ' + fmtTime(ev.endTime) : '') + ' ' : '') + ev.title;
         cell.appendChild(pill);
       });
       if (events.length > 3) {
@@ -3682,7 +3682,8 @@ GREETING RULES:
             }
             evDiv.style.height = 'calc(' + (spanSlots * 32) + 'px - 4px)';
             evDiv.style.zIndex = '3';
-            evDiv.textContent = ev.time + (ev.endTime ? ' - ' + ev.endTime : '') + ' · ' + ev.title;
+            const _fmtT = t => { if (!t) return ''; const [h,m] = t.split(':'); const hr=parseInt(h); return (hr%12||12)+':'+m+(hr>=12?' PM':' AM'); };
+            evDiv.textContent = _fmtT(ev.time) + (ev.endTime ? ' - ' + _fmtT(ev.endTime) : '') + ' · ' + ev.title;
             evDiv.title = ev.title;
             cell.appendChild(evDiv);
           }
