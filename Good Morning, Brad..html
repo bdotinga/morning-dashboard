@@ -1898,6 +1898,8 @@
     // Show loading state
     const taskList = document.getElementById('taskList');
     if (taskList) taskList.innerHTML = '<div class="empty-state" style="color:rgba(201,168,76,0.5);">Loading your data...</div>';
+    // Fallback render after 10 seconds no matter what
+    setTimeout(() => { if (document.getElementById('taskList') && document.getElementById('taskList').innerHTML.includes('Loading')) { renderAll(); } }, 10000);
     initApp();
   }
 
@@ -2008,12 +2010,16 @@
   }
 
   async function initApp() {
-    // Load all data from Supabase
+    // Load all data from Supabase with 8 second timeout
+    const withTimeout = (promise, ms) => Promise.race([
+      promise,
+      new Promise(resolve => setTimeout(() => resolve(null), ms))
+    ]);
     const [tasks, revenue, calendar, memory] = await Promise.all([
-      supaLoadTasks(),
-      supaLoadRevenue(),
-      supaLoadCalendar(),
-      supaLoadJarvisMemory()
+      withTimeout(supaLoadTasks(), 8000),
+      withTimeout(supaLoadRevenue(), 8000),
+      withTimeout(supaLoadCalendar(), 8000),
+      withTimeout(supaLoadJarvisMemory(), 8000)
     ]);
 
     // Load from Supabase - no seeding
