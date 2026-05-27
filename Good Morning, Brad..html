@@ -88,6 +88,9 @@
       letter-spacing: 3px;
       font-weight: 500;
       text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .header-right { display: flex; align-items: flex-start; gap: 1.5rem; }
@@ -374,7 +377,7 @@
       color: rgba(201,168,76,0.4); cursor: pointer; transition: all 0.2s;
       font-family: 'DM Sans', sans-serif;
     }
-    .task-tab.active { background: rgba(201,168,76,0.1); border-color: var(--gold); color: var(--gold); }
+    .task-tab.active { background: rgba(201,168,76,0.1); border-color: var(--gold); color: #1a2420; }
 
     .add-row { display: flex; gap: 8px; }
 
@@ -787,6 +790,489 @@
 
     .footer-brand { font-size: 10px; letter-spacing: 3px; color: rgba(201,168,76,0.3); text-transform: uppercase; font-weight: 500; }
 
+
+
+    .jarvis-cursor {
+      display: inline-block;
+      animation: blink 0.7s step-end infinite;
+      color: var(--gold);
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+
+
+
+
+
+    /* ── WDS GOALS & GRATITUDES ── */
+    .wds-goals-section {
+      background: #2a3530; border: 1px solid rgba(148,126,100,0.2);
+      border-radius: 10px; padding: 16px; margin-bottom: 14px;
+    }
+    .wds-goals-header {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 14px;
+    }
+    .wds-goals-header h2 {
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: rgba(193,172,143,0.6);
+    }
+    .wds-goals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 600px) { .wds-goals-grid { grid-template-columns: 1fr; } }
+    .wds-goals-col h3 {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.6px; margin-bottom: 8px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .wds-goals-col.personal h3 { color: #3B82F6; }
+    .wds-goals-col.business h3 { color: #c9a84c; }
+    .wds-goal-input { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .wds-goal-num { font-size: 11px; font-weight: 600; color: rgba(193,172,143,0.3); width: 14px; flex-shrink: 0; }
+    .wds-goal-input input {
+      background: rgba(0,0,0,0.2); border: 1px solid rgba(148,126,100,0.2);
+      border-radius: 6px; color: #f5f0e8; padding: 6px 10px;
+      font-size: 13px; font-family: inherit; width: 100%; transition: border-color 0.15s;
+    }
+    .wds-goal-input input:focus { outline: none; border-color: #c9a84c; }
+    .wds-goal-input input::placeholder { color: rgba(193,172,143,0.25); }
+    /* Rituals/Gratitudes */
+    .wds-rituals-wrapper { overflow-x: auto; margin-top: 0; }
+    .wds-rituals-section {
+      border: 1px solid rgba(148,126,100,0.2); border-top: none;
+      border-radius: 0 0 10px 10px; overflow: hidden; min-width: 830px;
+    }
+    .wds-rituals-grid {
+      display: grid; grid-template-columns: 52px repeat(7, minmax(110px, 1fr));
+      background: #2a3530;
+    }
+    .wds-rituals-label-col {
+      background: #1e2e2a; border-right: 1px solid rgba(148,126,100,0.2);
+      padding: 10px 6px; display: flex; flex-direction: column; justify-content: center;
+    }
+    .wds-rituals-label-col span {
+      font-size: 9px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.5px; color: rgba(193,172,143,0.3);
+      writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap;
+    }
+    .wds-rituals-day-col {
+      border-right: 1px solid rgba(148,126,100,0.15); padding: 10px 8px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .wds-rituals-day-col:last-child { border-right: none; }
+    .wds-ritual-check { display: flex; align-items: center; gap: 6px; }
+    .wds-ritual-check input[type="checkbox"] {
+      width: 14px; height: 14px; accent-color: #c9a84c; cursor: pointer; flex-shrink: 0;
+    }
+    .wds-ritual-check label { font-size: 11px; color: rgba(193,172,143,0.7); cursor: pointer; }
+    .wds-ritual-gratitude { margin-top: 6px; }
+    .wds-ritual-gratitude-title {
+      font-size: 9px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.5px; color: rgba(193,172,143,0.3); margin-bottom: 4px;
+    }
+    .wds-gratitude-input { display: flex; align-items: center; gap: 4px; margin-bottom: 3px; }
+    .wds-gratitude-input span { font-size: 10px; color: rgba(193,172,143,0.3); width: 10px; flex-shrink: 0; }
+    .wds-gratitude-input input {
+      background: rgba(0,0,0,0.15); border: 1px solid rgba(148,126,100,0.15);
+      border-radius: 4px; color: #f5f0e8; padding: 3px 6px;
+      font-size: 10px; font-family: inherit; width: 100%;
+    }
+    .wds-gratitude-input input:focus { outline: none; border-color: rgba(193,172,143,0.4); }
+    .wds-gratitude-input input::placeholder { color: rgba(193,172,143,0.2); font-size: 10px; }
+
+    /* ── WEEKLY DESIGN SYSTEM ── */
+    .wds-overlay {
+      display: none; position: fixed; inset: 0;
+      background: #1a2420; z-index: 3000;
+      flex-direction: column; overflow: hidden;
+    }
+    .wds-overlay.open { display: flex; }
+    .wds-topbar {
+      background: #2a3530; border-bottom: 1px solid rgba(148,126,100,0.2);
+      padding: 0 20px; display: flex; align-items: center;
+      justify-content: space-between; height: 56px;
+      position: sticky; top: 0; z-index: 10; flex-shrink: 0;
+    }
+    .wds-title { font-size: 15px; font-weight: 700; color: #f5f0e8; letter-spacing: -0.3px; }
+    .wds-title span { color: #c9a84c; }
+    .wds-topbar-right { display: flex; align-items: center; gap: 10px; }
+    .wds-nav-btn {
+      background: #2a3530; border: 1px solid rgba(148,126,100,0.2); color: rgba(193,172,143,0.55);
+      width: 32px; height: 32px; border-radius: 8px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; transition: all 0.15s; font-family: inherit;
+    }
+    .wds-nav-btn:hover { border-color: #c9a84c; color: #1a2420; }
+    .wds-today-btn {
+      background: #2a3530; border: 1px solid rgba(148,126,100,0.2); color: rgba(193,172,143,0.55);
+      padding: 5px 12px; border-radius: 8px; cursor: pointer;
+      font-size: 12px; font-weight: 500; font-family: inherit; transition: all 0.15s;
+    }
+    .wds-today-btn:hover { border-color: #c9a84c; color: #1a2420; }
+    .wds-week-label { font-size: 14px; font-weight: 600; color: #f5f0e8; min-width: 200px; text-align: center; }
+    .wds-close {
+      background: none; border: none; color: rgba(193,172,143,0.3);
+      font-size: 22px; cursor: pointer; padding: 4px 8px; line-height: 1; transition: color 0.15s;
+    }
+    .wds-close:hover { color: #f5f0e8; }
+    .wds-body { flex: 1; overflow-y: auto; padding: 16px 20px; }
+    .wds-legend {
+      display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 12px; align-items: center;
+    }
+    .wds-legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: rgba(193,172,143,0.55); }
+    .wds-legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .wds-hint { font-size: 11px; color: rgba(193,172,143,0.3); margin-left: auto; }
+    .wds-cal-wrapper { overflow-x: auto; border-radius: 12px; }
+    .wds-cal-grid {
+      display: grid;
+      grid-template-columns: 52px repeat(7, minmax(110px, 1fr));
+      border: 1px solid rgba(148,126,100,0.2); border-radius: 12px;
+      overflow: hidden; min-width: 830px; background: #2a3530;
+    }
+    .wds-cal-gutter {
+      background: #1e2e2a; border-bottom: 1px solid rgba(148,126,100,0.2); border-right: 1px solid rgba(148,126,100,0.15); height: 56px;
+    }
+    .wds-cal-day-hdr {
+      background: #1e2e2a; border-bottom: 1px solid rgba(148,126,100,0.2);
+      border-right: 1px solid rgba(148,126,100,0.15); padding: 10px 8px; text-align: center;
+    }
+    .wds-cal-day-hdr:last-child { border-right: none; }
+    .wds-cal-day-name { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; color: rgba(193,172,143,0.55); }
+    .wds-cal-day-num { font-size: 20px; font-weight: 700; color: #f5f0e8; line-height: 1.2; margin-top: 2px; display: block; }
+    .wds-cal-day-hdr.wds-today .wds-cal-day-num {
+      background: #c9a84c; color: #1a2420; width: 32px; height: 32px;
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 15px;
+    }
+    .wds-time-lbl {
+      background: #1e2e2a; border-right: 1px solid rgba(148,126,100,0.15); border-bottom: 1px solid rgba(148,126,100,0.2);
+      padding: 0 6px; display: flex; align-items: flex-start; justify-content: flex-end;
+      padding-top: 4px; height: 32px;
+    }
+    .wds-time-lbl span { font-size: 10px; color: rgba(193,172,143,0.5); font-weight: 500; white-space: nowrap; }
+    .wds-time-lbl.half span { visibility: hidden; }
+    .wds-cal-cell {
+      border-right: 1px solid rgba(148,126,100,0.15); border-bottom: 1px solid rgba(148,126,100,0.2);
+      height: 32px; position: relative; cursor: pointer; transition: background 0.1s;
+    }
+    .wds-cal-cell:last-child { border-right: none; }
+    .wds-cal-cell:hover { background: rgba(148,126,100,0.06); }
+    .wds-cal-cell.half { border-bottom: 1px dashed rgba(148,126,100,0.1); }
+    .wds-cal-event {
+      position: absolute; left: 2px; right: 2px; top: 2px; bottom: 2px;
+      border-radius: 4px; padding: 2px 6px; font-size: 11px; font-weight: 500;
+      cursor: pointer; overflow: hidden; z-index: 2;
+      display: flex; align-items: flex-start; line-height: 1.3;
+    }
+    .wds-cal-event.personal { background: rgba(59,130,246,0.15); color: #3B82F6; border-left: 2px solid #3B82F6; }
+    .wds-cal-event.business { background: rgba(139,92,246,0.15); color: #8B5CF6; border-left: 2px solid #8B5CF6; }
+    .wds-cal-event.health   { background: rgba(16,185,129,0.15); color: #10B981; border-left: 2px solid #10B981; }
+    .wds-cal-event.family   { background: rgba(245,158,11,0.15); color: #F59E0B; border-left: 2px solid #F59E0B; }
+    .wds-cal-event.calendar { background: rgba(148,126,100,0.15); color: #C9A84C; border-left: 2px solid #C9A84C; }
+    /* Event Modal inside WDS */
+    .wds-modal-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+      z-index: 4000; align-items: center; justify-content: center; padding: 16px;
+    }
+    .wds-modal-overlay.open { display: flex; }
+    .wds-modal {
+      background: #2a3530; border: 1px solid rgba(148,126,100,0.2); border-radius: 12px;
+      width: 100%; max-width: 440px; padding: 24px; position: relative;
+    }
+    .wds-modal-title { font-size: 16px; font-weight: 700; margin-bottom: 20px; color: #f5f0e8; }
+    .wds-form-group { margin-bottom: 14px; }
+    .wds-form-label {
+      display: block; font-size: 12px; font-weight: 600; color: rgba(193,172,143,0.55);
+      margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .wds-form-input, .wds-form-select, .wds-form-textarea {
+      width: 100%; background: #1e2e2a; border: 1px solid rgba(148,126,100,0.2); border-radius: 8px;
+      color: #f5f0e8; padding: 9px 12px; font-size: 14px; font-family: inherit;
+      transition: border-color 0.15s; box-sizing: border-box;
+    }
+    .wds-form-input:focus, .wds-form-select:focus, .wds-form-textarea:focus { outline: none; border-color: #c9a84c; }
+    .wds-form-input::placeholder, .wds-form-textarea::placeholder { color: rgba(193,172,143,0.3); }
+    .wds-form-select option { background: #1e2e2a; color: #f5f0e8; }
+    .wds-form-textarea { min-height: 80px; resize: vertical; }
+    .wds-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .wds-modal-actions { display: flex; gap: 8px; margin-top: 20px; justify-content: flex-end; }
+    .wds-btn { padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; border: 1px solid transparent; transition: all 0.15s; }
+    .wds-btn-primary { background: #c9a84c; color: #1a2420; border-color: #c9a84c; }
+    .wds-btn-primary:hover { background: #a8853a; }
+    .wds-btn-ghost { background: transparent; color: rgba(193,172,143,0.55); border-color: #334155; }
+    .wds-btn-ghost:hover { color: #f5f0e8; border-color: rgba(148,126,100,0.4); }
+    .wds-btn-danger { background: transparent; color: #EF4444; border-color: #EF4444; }
+    .wds-btn-danger:hover { background: #EF4444; color: white; }
+    .wds-modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; color: rgba(193,172,143,0.3); font-size: 20px; cursor: pointer; padding: 4px; line-height: 1; transition: color 0.15s; }
+    .wds-modal-close:hover { color: #f5f0e8; }
+
+    /* TASK DETAIL MODAL */
+    .task-item { cursor: pointer; }
+    .task-detail-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .task-detail-overlay.open { display: flex; }
+    .task-detail-modal {
+      background: #2a3530;
+      border: 1px solid rgba(148,126,100,0.25);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 500px;
+      padding: 28px;
+      position: relative;
+    }
+    .task-detail-header {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(193,172,143,0.5);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .task-detail-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(193,172,143,0.5);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .task-detail-input {
+      width: 100%;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(148,126,100,0.2);
+      border-radius: 8px;
+      color: var(--cream);
+      padding: 10px 12px;
+      font-size: 15px;
+      font-family: inherit;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+      transition: border-color 0.15s;
+    }
+    .task-detail-input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    .task-detail-textarea {
+      width: 100%;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(148,126,100,0.2);
+      border-radius: 8px;
+      color: var(--cream);
+      padding: 10px 12px;
+      font-size: 14px;
+      font-family: inherit;
+      min-height: 120px;
+      resize: vertical;
+      box-sizing: border-box;
+      transition: border-color 0.15s;
+    }
+    .task-detail-textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    .task-detail-textarea::placeholder,
+    .task-detail-input::placeholder { color: rgba(193,172,143,0.25); }
+    .task-detail-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 20px;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .task-detail-actions-right { display: flex; gap: 8px; }
+    .td-btn {
+      padding: 9px 20px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s;
+    }
+    .td-btn-save { background: var(--gold); color: #1a2420; border-color: var(--gold); }
+    .td-btn-save:hover { background: var(--gold-light); }
+    .td-btn-cancel { background: transparent; color: rgba(193,172,143,0.5); border-color: rgba(148,126,100,0.2); }
+    .td-btn-cancel:hover { color: var(--cream); border-color: var(--gold); }
+    .td-btn-delete { background: transparent; color: rgba(239,68,68,0.6); border-color: rgba(239,68,68,0.3); }
+    .td-btn-delete:hover { background: rgba(239,68,68,0.1); color: #ef4444; border-color: #ef4444; }
+    .td-btn-complete { background: transparent; color: rgba(201,168,76,0.6); border-color: rgba(201,168,76,0.2); }
+    .td-btn-complete:hover { background: rgba(201,168,76,0.1); color: var(--gold); border-color: var(--gold); }
+    .task-detail-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      background: none; border: none;
+      color: rgba(193,172,143,0.3);
+      font-size: 20px; cursor: pointer;
+      padding: 4px; line-height: 1;
+      transition: color 0.15s;
+    }
+    .task-detail-close:hover { color: var(--gold); }
+
+    /* TASK NOTES MODAL */
+    .task-notes-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .task-notes-overlay.open { display: flex; }
+    .task-notes-modal {
+      background: #2a3530;
+      border: 1px solid rgba(148,126,100,0.25);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 480px;
+      padding: 28px;
+      position: relative;
+    }
+    .task-notes-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold-light);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .task-notes-taskname {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+    .task-notes-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(193,172,143,0.6);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .task-notes-textarea {
+      width: 100%;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(148,126,100,0.25);
+      border-radius: 8px;
+      color: var(--cream);
+      padding: 12px;
+      font-size: 14px;
+      font-family: inherit;
+      min-height: 120px;
+      resize: vertical;
+      transition: border-color 0.15s;
+      box-sizing: border-box;
+    }
+    .task-notes-textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    .task-notes-textarea::placeholder { color: rgba(193,172,143,0.3); }
+    .task-notes-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      justify-content: flex-end;
+    }
+    .task-notes-btn {
+      padding: 9px 22px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s;
+    }
+    .task-notes-btn-save {
+      background: var(--gold);
+      color: #1a2420;
+      border-color: var(--gold);
+    }
+    .task-notes-btn-save:hover { background: var(--gold-light); }
+    .task-notes-btn-cancel {
+      background: transparent;
+      color: rgba(193,172,143,0.6);
+      border-color: rgba(148,126,100,0.25);
+    }
+    .task-notes-btn-cancel:hover { color: var(--cream); border-color: var(--gold); }
+    .task-notes-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      background: none;
+      border: none;
+      color: rgba(193,172,143,0.4);
+      font-size: 20px;
+      cursor: pointer;
+      padding: 4px;
+      line-height: 1;
+      transition: color 0.15s;
+    }
+    .task-notes-close:hover { color: var(--gold); }
+    .task-note-icon {
+      font-size: 13px;
+      cursor: pointer;
+      color: rgba(193,172,143,0.3);
+      margin-left: 6px;
+      transition: color 0.2s;
+      flex-shrink: 0;
+    }
+    .task-note-icon:hover { color: var(--gold); }
+    .task-note-icon.has-notes { color: rgba(193,172,143,0.7); }
+
+    /* VOICE BUTTON */
+    .voice-btn {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(201,168,76,0.3);
+      background: transparent;
+      color: rgba(201,168,76,0.5);
+      font-size: 16px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .voice-btn:hover { border-color: var(--gold); color: #1a2420; background: rgba(201,168,76,0.08); }
+    .voice-btn.listening {
+      border-color: #ef4444;
+      color: #ef4444;
+      background: rgba(239,68,68,0.1);
+      animation: voicePulse 1s ease-in-out infinite;
+    }
+    .voice-btn.speaking {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201,168,76,0.12);
+      animation: voicePulse 1.5s ease-in-out infinite;
+    }
+    @keyframes voicePulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0.3); }
+      50% { box-shadow: 0 0 0 6px rgba(201,168,76,0); }
+    }
+    .voice-status {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(201,168,76,0.4);
+      text-align: center;
+      min-height: 16px;
+      transition: color 0.2s;
+    }
+    .voice-status.active { color: var(--gold); }
+
     @media (max-width: 750px) {
       .main-layout { grid-template-columns: 1fr; }
       .greeting { font-size: 24px; }
@@ -795,9 +1281,61 @@
       .affirmations { gap: 1rem; }
     }
   </style>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    /* LOGIN SCREEN */
+    #loginScreen {
+      position: fixed; inset: 0; background: #1a2420;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999; flex-direction: column; gap: 0;
+    }
+    #loginScreen.hidden { display: none; }
+    .login-box {
+      background: #2a3530; border: 1px solid rgba(148,126,100,0.25);
+      border-radius: 16px; padding: 40px 36px; width: 100%; max-width: 380px;
+    }
+    .login-logo {
+      text-align: center; margin-bottom: 28px;
+    }
+    .login-logo-title {
+      font-size: 26px; font-weight: 700; color: #f5f0e8;
+      font-family: 'Playfair Display', serif; margin-bottom: 4px;
+    }
+    .login-logo-sub {
+      font-size: 10px; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: rgba(193,172,143,0.5);
+    }
+    .login-label {
+      display: block; font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: rgba(193,172,143,0.5); margin-bottom: 6px; margin-top: 16px;
+    }
+    .login-input {
+      width: 100%; background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(148,126,100,0.2); border-radius: 8px;
+      color: #f5f0e8; padding: 11px 14px; font-size: 15px;
+      font-family: inherit; box-sizing: border-box; transition: border-color 0.15s;
+    }
+    .login-input:focus { outline: none; border-color: #c9a84c; }
+    .login-input::placeholder { color: rgba(193,172,143,0.25); }
+    .login-btn {
+      width: 100%; background: #c9a84c; color: #1a2420;
+      border: none; border-radius: 8px; padding: 12px;
+      font-size: 14px; font-weight: 700; font-family: inherit;
+      cursor: pointer; margin-top: 24px; letter-spacing: 1px;
+      text-transform: uppercase; transition: background 0.15s;
+    }
+    .login-btn:hover { background: #b09a7e; }
+    .login-error {
+      color: #ef4444; font-size: 12px; text-align: center;
+      margin-top: 12px; min-height: 18px;
+    }
+  </style>
 </head>
 <body>
-<div id="dashboard">
+<div id="dashboard" style="display:none;">
 
   <!-- HEADER -->
   <div class="header">
@@ -951,14 +1489,14 @@
 
       <!-- TASK PANEL -->
       <div>
-        <div class="collapse-header open" id="taskHeader" onclick="togglePanel('task')">
+<div class="collapse-header" id="taskHeader" onclick="togglePanel('task')">
           <div class="collapse-left">
             <div class="collapse-label">Today's Tasks</div>
             <div class="collapse-badge" id="taskBadge">24 remaining</div>
           </div>
           <div class="collapse-arrow"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"></polyline></svg></div>
         </div>
-        <div class="collapse-body open" id="taskBody">
+        <div class="collapse-body" id="taskBody">
           <div class="collapse-inner">
             <div class="task-tabs">
               <button class="task-tab active" id="tabToday" onclick="switchTaskTab('today')">Today</button>
@@ -1136,7 +1674,9 @@
         <div class="collapse-body" id="jarvisBody">
           <div class="collapse-inner" style="gap:0.6rem;">
             <div id="jarvisMsgs" style="display:flex; flex-direction:column; gap:0.6rem; max-height:360px; overflow-y:auto; padding-right:4px;"></div>
+            <div id="jarvisVoiceStatus" class="voice-status"></div>
             <div style="display:flex; gap:8px; margin-top:0.4rem;">
+              <button class="voice-btn" id="voiceBtn" onclick="toggleVoice()" title="Hold to speak">🎤</button>
               <input class="panel-input" id="jarvisInput" type="text" placeholder="Ask Jarvis anything..." onkeydown="if(event.key==='Enter') sendJarvis()" />
               <button class="add-btn" onclick="sendJarvis()" style="font-size:14px;">➤</button>
             </div>
@@ -1149,17 +1689,17 @@
 
   <!-- CALENDAR TOGGLE BUTTON -->
   <div style="display:flex; justify-content:center; margin: 1.5rem 0 0;">
-    <button class="collapse-header open" id="calToggleBtn" onclick="toggleCalendar()" style="width:100%; max-width:1100px; border-radius:8px;">
+    <button class="collapse-header" id="calToggleBtn" onclick="toggleCalendar()" style="width:100%; max-width:1100px; border-radius:8px;">
       <div class="collapse-left">
         <div class="collapse-label">Calendar</div>
         <div class="collapse-badge" id="calBadge">2 today</div>
       </div>
-      <div class="collapse-arrow" id="calArrow" style="transform: rotate(180deg);"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"></polyline></svg></div>
+      <div class="collapse-arrow" id="calArrow"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"></polyline></svg></div>
     </button>
   </div>
 
   <!-- FULL WIDTH CALENDAR -->
-  <div id="calendarPanel" style="display: block; margin-top: 0px;">
+  <div id="calendarPanel" style="display: none; margin-top: 0px;">
     <div style="max-width:1100px; margin:0 auto; background:var(--card-bg); border:0.5px solid var(--border); border-top:none; border-radius:0 0 8px 8px; padding:1.5rem;">
 
       <!-- CAL HEADER -->
@@ -1189,7 +1729,8 @@
         <div style="display:flex; gap:8px; flex-wrap:wrap;">
           <input class="panel-input" id="calEventTitle" type="text" placeholder="Event title..." style="flex:2; min-width:150px;">
           <input class="panel-input" id="calEventDate" type="date" style="max-width:140px; color:var(--cream-muted);">
-          <input class="panel-input" id="calEventTime" type="time" style="max-width:110px; color:var(--cream-muted);">
+          <input class="panel-input" id="calEventTime" type="time" style="max-width:110px; color:var(--cream-muted);" placeholder="Start">
+          <input class="panel-input" id="calEventEndTime" type="time" style="max-width:110px; color:var(--cream-muted);" placeholder="End">
           <input class="panel-input" id="calEventNotes" type="text" placeholder="Notes (optional)..." style="flex:2; min-width:150px;">
           <button class="add-btn" onclick="addCalEvent()">+</button>
         </div>
@@ -1228,6 +1769,16 @@
     </div>
   </div>
 
+  <!-- WEEKLY DESIGN SYSTEM BUTTON -->
+  <div style="display:flex; justify-content:center; margin: 0.5rem 0 0;">
+    <button onclick="openWDS()" class="collapse-header" style="width:100%; max-width:1100px; border-radius:8px; cursor:pointer;">
+      <div class="collapse-left">
+        <div class="collapse-label">Weekly Design System</div>
+      </div>
+      <div style="font-size:13px; color:rgba(193,172,143,0.4);">&#9776;</div>
+    </button>
+  </div>
+
   <!-- FOOTER -->
   <div class="footer">
     <div class="footer-brand">Mint Mgmt · Brad Dotinga</div>
@@ -1236,6 +1787,216 @@
 
 </div>
 <script>
+
+  // ── SUPABASE ──────────────────────────────────────────────────
+  const SUPA_URL = 'https://tsxrlncokncwuyctcjop.supabase.co';
+  const SUPA_KEY = 'sb_publishable_MdzWYbo3bvVvfv3jj-tYeg_3pArGPiu';
+  const supa = supabase.createClient(SUPA_URL, SUPA_KEY);
+  let supaUser = null;
+
+  async function doLogin() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const errEl = document.getElementById('loginError');
+    errEl.textContent = '';
+    if (!email || !password) { errEl.textContent = 'Please enter your email and password.'; return; }
+    const { data, error } = await supa.auth.signInWithPassword({ email, password });
+    if (error) { errEl.textContent = 'Invalid email or password.'; return; }
+    supaUser = data.user;
+    showApp();
+  }
+
+  async function checkAuth() {
+    const { data } = await supa.auth.getSession();
+    if (data.session) {
+      supaUser = data.session.user;
+      showApp();
+    }
+  }
+
+  function showApp() {
+    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById('dashboard').style.display = '';
+    initApp();
+  }
+
+  // ── SUPABASE DATA FUNCTIONS ───────────────────────────────────
+
+  async function supaLoadTasks() {
+    const { data, error } = await supa.from('tasks').select('*').eq('user_id', supaUser.id);
+    if (error) { console.error('supaLoadTasks:', error); return null; }
+    // Convert to allTasks format
+    const result = {};
+    data.forEach(t => {
+      if (!result[t.day_key]) result[t.day_key] = [];
+      result[t.day_key].push({
+        id: t.id, text: t.text, done: t.done,
+        dueDate: t.due_date, notes: t.notes, completedDate: t.completed_date
+      });
+    });
+    return result;
+  }
+
+  async function supaUpsertTask(dayKey, task) {
+    const { error } = await supa.from('tasks').upsert({
+      id: task.id, user_id: supaUser.id, day_key: dayKey,
+      text: task.text, done: task.done, due_date: task.dueDate || null,
+      notes: task.notes || null, completed_date: task.completedDate || null
+    });
+    if (error) console.error('supaUpsertTask:', error);
+  }
+
+  async function supaDeleteTask(taskId) {
+    const { error } = await supa.from('tasks').delete().eq('id', taskId).eq('user_id', supaUser.id);
+    if (error) console.error('supaDeleteTask:', error);
+  }
+
+  async function supaLoadRevenue() {
+    const { data, error } = await supa.from('revenue').select('*').eq('user_id', supaUser.id);
+    if (error) { console.error('supaLoadRevenue:', error); return null; }
+    const result = {};
+    data.forEach(r => {
+      if (!result[r.month_key]) result[r.month_key] = [];
+      result[r.month_key].push({ id: r.id, label: r.label, amount: r.amount, date: r.date });
+    });
+    return result;
+  }
+
+  async function supaUpsertRevenue(monthKey, entry) {
+    const { error } = await supa.from('revenue').upsert({
+      id: entry.id, user_id: supaUser.id, month_key: monthKey,
+      label: entry.label, amount: entry.amount, date: entry.date
+    });
+    if (error) console.error('supaUpsertRevenue:', error);
+  }
+
+  async function supaDeleteRevenue(entryId) {
+    const { error } = await supa.from('revenue').delete().eq('id', entryId).eq('user_id', supaUser.id);
+    if (error) console.error('supaDeleteRevenue:', error);
+  }
+
+  async function supaLoadCalendar() {
+    const { data, error } = await supa.from('calendar_events').select('*').eq('user_id', supaUser.id);
+    if (error) { console.error('supaLoadCalendar:', error); return null; }
+    const result = {};
+    data.forEach(e => {
+      if (!result[e.date_key]) result[e.date_key] = [];
+      result[e.date_key].push({
+        id: e.id, title: e.title, time: e.time || '',
+        endTime: e.end_time || '', notes: e.notes || '', type: e.type
+      });
+    });
+    return result;
+  }
+
+  async function supaUpsertCalEvent(dateKey, ev) {
+    const { error } = await supa.from('calendar_events').upsert({
+      id: ev.id, user_id: supaUser.id, date_key: dateKey,
+      title: ev.title, time: ev.time || null, end_time: ev.endTime || null,
+      notes: ev.notes || null, type: ev.type || 'manual'
+    });
+    if (error) console.error('supaUpsertCalEvent:', error);
+  }
+
+  async function supaDeleteCalEvent(eventId) {
+    const { error } = await supa.from('calendar_events').delete().eq('id', eventId).eq('user_id', supaUser.id);
+    if (error) console.error('supaDeleteCalEvent:', error);
+  }
+
+  async function supaLoadJarvisMemory() {
+    const { data, error } = await supa.from('jarvis_memory')
+      .select('*').eq('user_id', supaUser.id)
+      .order('created_at', { ascending: true }).limit(30);
+    if (error) { console.error('supaLoadJarvisMemory:', error); return []; }
+    return data.map(m => ({ role: m.role, content: m.content }));
+  }
+
+  async function supaSaveJarvisMessage(role, content) {
+    const { error } = await supa.from('jarvis_memory').insert({
+      user_id: supaUser.id, role, content
+    });
+    if (error) console.error('supaSaveJarvisMessage:', error);
+    // Keep only last 30 messages
+    const { data } = await supa.from('jarvis_memory')
+      .select('id').eq('user_id', supaUser.id)
+      .order('created_at', { ascending: true });
+    if (data && data.length > 30) {
+      const toDelete = data.slice(0, data.length - 30).map(r => r.id);
+      await supa.from('jarvis_memory').delete().in('id', toDelete);
+    }
+  }
+
+  async function initApp() {
+    // Load all data from Supabase
+    const [tasks, revenue, calendar, memory] = await Promise.all([
+      supaLoadTasks(),
+      supaLoadRevenue(),
+      supaLoadCalendar(),
+      supaLoadJarvisMemory()
+    ]);
+
+    // Seed if empty
+    if (tasks !== null && Object.keys(tasks).length === 0) {
+      await seedSupabaseTasks();
+    } else if (tasks !== null) {
+      allTasks = tasks;
+      localStorage.setItem(TASK_KEY, JSON.stringify(allTasks));
+    }
+
+    if (revenue !== null && Object.keys(revenue).length === 0) {
+      await seedSupabaseRevenue();
+    } else if (revenue !== null) {
+      allRevenue = revenue;
+      localStorage.setItem(REV_KEY, JSON.stringify(allRevenue));
+    }
+
+    if (calendar !== null) {
+      allCalEvents = calendar;
+      localStorage.setItem(CAL_KEY, JSON.stringify(allCalEvents));
+    }
+
+    if (memory.length > 0) {
+      jarvisHistory = memory;
+    }
+
+    renderAll();
+  }
+
+  async function seedSupabaseTasks() {
+    // Push seed tasks to Supabase
+    const seedTasks = JSON.parse(localStorage.getItem(TASK_KEY) || '{}');
+    for (const [dayKey, tasks] of Object.entries(seedTasks)) {
+      for (const task of tasks) {
+        await supaUpsertTask(dayKey, task);
+      }
+    }
+    const loaded = await supaLoadTasks();
+    if (loaded) { allTasks = loaded; localStorage.setItem(TASK_KEY, JSON.stringify(allTasks)); }
+  }
+
+  async function seedSupabaseRevenue() {
+    const seedRev = JSON.parse(localStorage.getItem(REV_KEY) || '{}');
+    for (const [monthKey, entries] of Object.entries(seedRev)) {
+      for (const entry of entries) {
+        await supaUpsertRevenue(monthKey, entry);
+      }
+    }
+    const loaded = await supaLoadRevenue();
+    if (loaded) { allRevenue = loaded; localStorage.setItem(REV_KEY, JSON.stringify(allRevenue)); }
+  }
+
+  function renderAll() {
+    renderProtocol();
+    renderTasks();
+    renderRevenue();
+    renderBudget();
+    updateCalBadge();
+    updateClock();
+    fetchWeather();
+    setInterval(updateClock, 1000);
+    setInterval(fetchWeather, 10 * 60 * 1000);
+  }
+
   // ── PROTOCOL ─────────────────────────────────────────────────
   const protocolItems = [
     "Wake up at 4:50 AM",
@@ -1249,6 +2010,22 @@
     "Answer any emails needed",
     "Start my tasks for the day"
   ];
+
+  // ── SEED DATA ON FIRST LOAD ───────────────────────────────────
+  (function seedIfEmpty() {
+    const TKEY = 'brad_tasks';
+    const RKEY = 'brad_revenue';
+    const CKEY = 'brad_calendar';
+    if (localStorage.getItem(TKEY)) return; // already seeded
+
+    const tasks = {"2026-05-11":[{"text":"Set up You Tube Channel","done":false,"id":1778507966521,"dueDate":"2026-05-11"},{"text":"Update David on roof start date","done":false,"id":1778507756339,"dueDate":"2026-05-13"},{"text":"Pricing For Mac","done":false,"id":1778520302789,"dueDate":"2026-05-13"},{"text":"Books For Lisa","done":false,"id":1778507715974,"dueDate":"2026-05-15"},{"text":"Oil Change On Truck. Drop Off 7:45am","done":false,"id":1778520858088,"dueDate":"2026-05-21"},{"text":"Build Mint Website","done":false,"id":1778507410035,"dueDate":null},{"text":"Contact Chilliwack cabinet door company","done":false,"id":1778507533603,"dueDate":null},{"text":"Follow Up With Mac Invoice","done":false,"id":1778507554072,"dueDate":null},{"text":"Have Claude build me a AI assistant app","done":false,"id":1778507647457,"dueDate":null},{"text":"Reach out to Steph Boyce","done":false,"id":1778507656173,"dueDate":null},{"text":"Check Out Whisper Flow","done":false,"id":1778507672526,"dueDate":null},{"text":"Call CRA re: GST","done":false,"id":1778507683971,"dueDate":null},{"text":"Ideal Siding Church Take Off","done":false,"id":1778507824525,"dueDate":null},{"text":"Ideal Siding Police Station Take Offs","done":false,"id":1778507848303,"dueDate":null},{"text":"Send Onboarding email to Tenisk Masonry","done":false,"id":1778507886270,"dueDate":null},{"text":"Find my next book to read","done":false,"id":1778508051041,"dueDate":null},{"text":"Book oil change for truck","done":true,"id":1778507966523,"dueDate":null},{"text":"Create the rest of my week","done":true,"id":1778507966524,"dueDate":null}],"2026-05-08":[{"text":"Update David Next Week","done":false,"id":1778243290722,"dueDate":"2026-05-13"},{"text":"Have Claude build me a AI assistant app","done":false,"id":1778243085597,"dueDate":null},{"text":"Reach out to Steph Boyce","done":false,"id":1778243103363,"dueDate":null},{"text":"Check out Whisper Flow","done":false,"id":1778243167756,"dueDate":null},{"text":"Call CRA","done":false,"id":1778243180716,"dueDate":null},{"text":"Ideal Siding Calgary Church Take Off","done":false,"id":1778243204995,"dueDate":null},{"text":"Ideal Siding Toronto Police Station bid review","done":false,"id":1778243245638,"dueDate":null},{"text":"Order Summers Mothers Day Gift","done":true,"id":1778243085598,"dueDate":null},{"text":"2024 NOA","done":true,"id":1778243085599,"dueDate":null},{"text":"Respond to accountant","done":true,"id":1778243085600,"dueDate":null}],"2026-05-12":[{"text":"Respond to Susy from Pitre James","done":false,"id":1778590988431,"dueDate":"2026-05-13"}]};
+    const revenue = {"2026-05":[{"label":"Teknisk Masonry","amount":2500,"date":"2026-05-08","id":1778243879964},{"label":"Big Dog Exteriors - Shops & Eng Deposit","amount":5750,"date":"2026-05-08","id":1778243825697},{"label":"Ideal Siding Calgary - Readiness Coaching","amount":1840,"date":"2026-05-08","id":1778243779822},{"label":"Ideal Siding Calgary - Sales Funnel","amount":6800,"date":"2026-05-08","id":1778243702840},{"label":"Calgary Trusted Cleaners - Sales Funnel","amount":3500,"date":"2026-05-08","id":1778243603261},{"label":"Big Dog Exteriors - Sales Funnel","amount":3500,"date":"2026-05-08","id":1778243570357}]};
+    const calendar = {"2026-05-12":[{"title":"Ideal Siding Coaching - Toronto - LIVE","time":"09:00","notes":"","id":1778243001,"type":"manual"},{"title":"Ideal Siding Coaching - Calgary - LIVE","time":"","notes":"","id":1778243002,"type":"manual"}],"2026-05-14":[{"title":"Shop Drawing Review","time":"","notes":"","id":1778243003,"type":"manual"}]};
+
+    localStorage.setItem(TKEY, JSON.stringify(tasks));
+    localStorage.setItem(RKEY, JSON.stringify(revenue));
+    localStorage.setItem(CKEY, JSON.stringify(calendar));
+  })();
 
   const PROTO_KEY = 'brad_protocol';
   const TASK_KEY  = 'brad_tasks';
@@ -1328,14 +2105,26 @@
 
   function toggleTask(dayKey, id) {
     allTasks = loadTasks();
+    const today = getTodayKey();
     const task = (allTasks[dayKey] || []).find(t => t.id === id);
-    if (task) { task.done = !task.done; saveTasks(allTasks); renderTasks(); }
+    if (!task) return;
+    task.done = !task.done;
+    // If marking done and task is from a past date, move it to today so it shows in today's list
+    if (task.done && dayKey !== today) {
+      allTasks[dayKey] = (allTasks[dayKey] || []).filter(t => t.id !== id);
+      if (!allTasks[today]) allTasks[today] = [];
+      task.completedDate = today;
+      allTasks[today].push(task);
+    }
+    saveTasks(allTasks);
+    renderTasks();
   }
 
   function deleteTask(dayKey, id) {
     allTasks = loadTasks();
     allTasks[dayKey] = (allTasks[dayKey] || []).filter(t => t.id !== id);
-    saveTasks(allTasks);
+    localStorage.setItem(TASK_KEY, JSON.stringify(allTasks));
+    if (supaUser) supaDeleteTask(id);
     renderTasks();
   }
 
@@ -1403,11 +2192,11 @@
         <div class="check-box task-check"><div class="t-check-mark"></div></div>
         <div class="task-item-text">${task.text}</div>
         ${dueBadge}
-        <button class="item-delete task-edit-btn" style="color:rgba(201,168,76,0.35);" title="Edit">✎</button>
+        ${task.notes ? '<span style="color:rgba(201,168,76,0.5);font-size:11px;margin-left:4px;" title="Has notes">●</span>' : ''}
         <button class="item-delete task-del-btn" title="Delete">✕</button>`;
-      li.querySelector('.task-check').addEventListener('click', () => toggleTask(task.dayKey, task.id));
-      li.querySelector('.task-edit-btn').addEventListener('click', () => editTask(task.dayKey, task.id));
-      li.querySelector('.task-del-btn').addEventListener('click', () => deleteTask(task.dayKey, task.id));
+      li.querySelector('.task-check').addEventListener('click', (e) => { e.stopPropagation(); toggleTask(task.dayKey, task.id); });
+      li.querySelector('.task-del-btn').addEventListener('click', (e) => { e.stopPropagation(); deleteTask(task.dayKey, task.id); });
+      li.addEventListener('click', () => openTaskDetail(task.id, task.dayKey));
       list.appendChild(li);
     });
     updateTaskBadge();
@@ -1415,14 +2204,41 @@
 
   function renderTaskArchive() {
     const content = document.getElementById('archiveContent');
-    const today = getTodayKey();
-    const pastDates = Object.keys(allTasks).filter(d => d !== today && (allTasks[d]||[]).some(t => t.done)).sort((a,b) => b.localeCompare(a));
-    if (!pastDates.length) { content.innerHTML = '<div class="no-archive">No archived tasks yet.</div>'; return; }
-    content.innerHTML = '';
     const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    pastDates.forEach(date => {
-      const tasks = allTasks[date].filter(t => t.done);
+
+    // Always reload fresh from localStorage
+    allTasks = loadTasks();
+
+    // Collect all done tasks from all dates
+    let allDone = [];
+    Object.keys(allTasks).forEach(dayKey => {
+      (allTasks[dayKey] || []).forEach(task => {
+        if (task.done) {
+          allDone.push({ ...task, dayKey });
+        }
+      });
+    });
+
+    if (!allDone.length) {
+      content.innerHTML = '<div class="no-archive">No completed tasks yet.</div>';
+      return;
+    }
+
+    // Group by completedDate or dayKey
+    const grouped = {};
+    allDone.forEach(task => {
+      const dateKey = task.completedDate || task.dayKey;
+      if (!grouped[dateKey]) grouped[dateKey] = [];
+      grouped[dateKey].push(task);
+    });
+
+    // Sort dates newest first
+    const sortedDates = Object.keys(grouped).sort((a,b) => b.localeCompare(a));
+    content.innerHTML = '';
+
+    sortedDates.forEach(date => {
+      const tasks = grouped[date];
       if (!tasks.length) return;
       const d = new Date(date + 'T12:00:00');
       const label = days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
@@ -1444,13 +2260,21 @@
     const archivePanel = document.getElementById('archivePanel');
     document.getElementById('tabToday').classList.toggle('active', tab === 'today');
     document.getElementById('tabArchive').classList.toggle('active', tab === 'archive');
-    if (tab === 'today') { todayPanel.classList.remove('hidden'); archivePanel.classList.remove('visible'); }
-    else { todayPanel.classList.add('hidden'); archivePanel.classList.add('visible'); renderTaskArchive(); }
+    if (tab === 'today') { todayPanel.classList.remove('hidden'); archivePanel.classList.remove('visible'); renderTasks(); }
+    else { todayPanel.classList.add('hidden'); archivePanel.classList.add('visible'); allTasks = loadTasks(); renderTaskArchive(); }
   }
 
   // ── REVENUE ───────────────────────────────────────────────────
   function loadRevenue() { try { const r = localStorage.getItem(REV_KEY); return r ? JSON.parse(r) : {}; } catch(e) { return {}; } }
-  function saveRevenue(r) { localStorage.setItem(REV_KEY, JSON.stringify(r)); }
+  function saveRevenue(r) {
+    localStorage.setItem(REV_KEY, JSON.stringify(r));
+    allRevenue = r;
+    if (supaUser) {
+      Object.entries(r).forEach(([monthKey, entries]) => {
+        entries.forEach(entry => supaUpsertRevenue(monthKey, entry));
+      });
+    }
+  }
 
   let allRevenue = loadRevenue();
 
@@ -1676,47 +2500,170 @@
 
     return `You are J.A.R.V.I.S — Just A Rather Very Intelligent System — the AI assistant from Iron Man. You serve Brad Dotinga exclusively. You speak exactly like Jarvis from the Iron Man films — confident, precise, calm, occasionally dry wit, always respectful, always addressing Brad as "Mr. Dotinga." Never break character. Never say you are Claude or an AI assistant. You are Jarvis.
 
-BRAD'S FULL PROFILE:
+BRAD'S COMPLETE PROFILE:
 
-Personal:
+PERSONAL:
 - Full name: Brad Dotinga. Age 44. Based in Kelowna, BC, Canada.
-- Wife: Summer Dotinga, age 42. Two daughters: Olive Dotinga, age 15, and Ruby Dotinga, age 10.
-- Parents: Terry and Bill Dotinga.
-- Vacation home in Osoyoos, BC — where the family spends most spare time.
+- Current address: #614 3779 Lakeshore Drive, Kelowna, BC, V1W 0C8. Moved here August 2024.
+- Lake house: #4, 4331 Oleander Drive, Osoyoos, BC. Family goes every year as soon as Olive and Ruby finish school, stays 6 weeks. Brad and Summer work while there but maintain a strong work/play balance.
 - Man of faith — believes in God.
 - Physically: 6'1", 200 lbs, 12% body fat year round. Lifts weights, in excellent shape.
-- Diet: meat, vegetables, rice and potatoes. Eats clean and disciplined.
-- Wakes up at 4:50 AM daily. Rise Ritual every morning: breathwork, meditation, visualization, weekly design system review, goals, gratitudes, budgets, accounts, emails.
+- Diet: meat, vegetables, rice and potatoes. Eats clean and disciplined. Cannot use wooden forks — the sensation is unbearable to him, like nails on a chalkboard.
+- Wakes up at 4:50 AM daily — a game changer for his productivity. Rise Ritual every morning: breathwork, meditation, visualization, weekly design system review, goals, gratitudes, budgets, accounts, emails.
+- Takes a 20-minute nap at 1:30 PM daily to refresh and reset.
 - Loves reading nonfiction to get smarter.
 - Enjoys saunas and cold plunges.
 - Competitive. Goes all in on everything. Attacks the day.
 - Does everything for his family — motivated by giving them an extraordinary life.
 - Feels blessed for what he has but has massive goals for more.
-- Starting business coaching with Dan Martell in the coming weeks. Dan Martell is his primary business mentor.
+- Starting business coaching with Dan Martell — his primary business mentor.
 
-Business:
-- Founder of Mint Management & Design Inc. — business consulting and coaching for trades and contractor business owners. Based in Kelowna, BC. Tagline: LEAD.BUILD.GROW.
+FAMILY:
+- Wife: Summer Dotinga, age 42. Senior Estimator at The Roof Doctor in Kelowna, BC — short term only, not happy there, no culture, company struggling. Brad's mission is to hit $100K/month and retire her. Her dream cars: Mercedes AMG G-Wagon and a vintage convertible Porsche. Brad and Summer married in 2004. Left Abbotsford in 2012, lived in Vancouver 15 years, moved to Kelowna August 2024.
+- Daughter: Olive Dotinga, age 15. Loves drama.
+- Daughter: Ruby Dotinga, age 10. Loves sewing.
+- Dog: Clover, a 5-year-old Mini Schnauzer. Has a small fatty lump (non-cancerous) and possible bladder stones — frequent urination.
+
+BRAD'S BACKSTORY:
+- Grew up in Abbotsford, BC. Entrepreneur his whole life.
+- Built and scaled building envelope companies for 25+ years.
+- In 2021, his company Mint Exteriors (co-owned with Summer) was acquired by Creo Developments and renamed Maison Exteriors. Brad became GM, Summer became Ops Manager and Sr. PM.
+- Left Maison Exteriors February 2025 — alignment was off. His vision and the owners' (Harald and Andrea Sinow) were going in opposite directions fast.
+- Started Mint Management immediately after leaving. Summer partnered initially then chose job security and joined The Roof Doctor as they relocated to Kelowna.
+- Leaving Maison was one of the hardest and best decisions of his life. He will never go back to working for someone else.
+
+BRAD'S FAMILY:
+- Parents: Bill and Terry Dotinga. Live in Abbotsford. Raised Brad and his sisters textbook well — Brad credits this for his strong marriage and family. Relationship with parents is excellent and always has been.
+- Parents co-own the Osoyoos lake house with Brad and Summer (50/50).
+
+BRAD'S SISTERS (oldest to youngest):
+1. Erika Visser — married to Aaron Visser. Live in Chilliwack. Have a pool everyone uses in summer. Kids: Jessica and Jamie (oldest to youngest). Aaron is unhappy at his job but staying for company shares.
+2. Jennifer (Jen) Holding — married to Gareth Holding. Kids: Ashley and Connor (oldest to youngest).
+3. Stephanie (Steph) Ingwersen — married to Jordan (Jord) Ingwersen. Live in Abbotsford. Kids: Stella, Dale, John (oldest to youngest). Dog: Penny (Golden Retriever). Cat: Lou (orange tabby) — perpetually disappears to the neighbor's house for days at a time and always comes back just when you think he's gone for good.
+
+FAITH:
+- Brad and his family are people of faith. Found Trinity Church in Kelowna. Attendance has been limited — Big White ski season tickets took up weekends this winter, and now heading to Osoyoos for 6 weeks. Faith is important to Brad and something he wants to be more consistent with.
+
+LIFESTYLE & ROUTINES:
+- Became a ski family this year — season tickets at Big White.
+- Osoyoos lake house every summer for 6 weeks as soon as Olive and Ruby finish school. Brad and Summer work but keep strong work/play balance.
+- Hiking: Brad and Summer hike Knox Mountain twice a week — Wednesdays at 6:00 AM and Saturdays at 7:00 AM.
+- Gym: Monday, Wednesday, Friday. Monday and Wednesday at 4:30 PM. Friday at 6:00 AM (so the weekend starts early — Ruby gets picked up from school at 2:30 PM Friday).
+- Summer's morning routine: up at 5:30 AM, walks Clover every morning to start her day.
+- Brad's evening routine: works until dinner, eats dinner, walks Clover around 8:00 PM, showers, in bed by 9:00 PM. Laser focused on building $100K/month — decompression comes later.
+- Brad's superpower: closing deals. He can land deals like no one else. His biggest constraint is leads — give him a warm lead and it's closed. Period.
+
+PERFECT SATURDAY (DOTINGA FAMILY):
+- Knox Mountain hike at 7:00 AM.
+- Family breakfast after — bacon and eggs with fresh bread from Sprout.
+- Slow morning together.
+- Rocket Subs for lunch — the 4 of them share 2 subs.
+- Groceries done on Saturdays.
+- Happy hour at 5:00 PM.
+- Nice family dinner.
+- Early to bed so Sunday starts fresh.
+
+THE GIRLS:
+- Olive Dotinga, age 15, Grade 10. 4.0 GPA. Academically exceptional. Wants to go into the medical field. Open to multiple universities — Brad and Summer are fully supportive wherever she goes.
+- Ruby Dotinga, age 10. Loves sewing. Dreams of going to LA or Paris after graduation to pursue fashion. Brad and Summer are fully supportive of this too.
+
+BRAD'S NORTH STAR — Jarvis must never let Brad forget this:
+"I can do hard things. I am the Architect of my life. I get to design my life exactly how I want it to be. We are building this company to $100K/month for Summer and the girls so we can live our dream life. It won't be easy. There will be setbacks. Don't give up. Be your own biggest fan instead of critiquing every move you make. Imagination is the most powerful force — life uses it to know what to create next. To change your life, change your imagination and change your thoughts. I will be the AI expert that everyone in my circle goes to. Every version of you that you desire is possible. I am wealth. I am health. I am abundance. I am joy. Entrepreneurship is realizing the person you have to become is harder to build than the business itself."
+
+When Brad is stressed, stuck, or second-guessing himself — Jarvis must reflect this back to him with conviction.
+- Daughter: Olive Dotinga, age 15. Loves drama.
+- Daughter: Ruby Dotinga, age 10. Loves sewing.
+- Dog: Clover, a 5-year-old Mini Schnauzer.
+- Brad and Summer want to start a monthly date night. Top date night idea: Derek's Steakhouse in Kelowna.
+
+FOOD & DRINK:
+- Morning: coffee. Afternoon: iced Americano.
+- No alcohol during the week — work and sleep are priority #1. Weekends: glass of wine or a Margarita.
+- Favourite foods: sushi (Pandosy), tacos (downtown Kelowna), Rocket Subs, Fancy's, Italian food. Wants to try Derek's Steakhouse for a date night with Summer.
+
+SPORTS:
+- Hockey: Vancouver Canucks fan.
+- Baseball: Toronto Blue Jays fan.
+- Golfs.
+
+DREAM POSSESSIONS:
+- Car 1: Black Mercedes AMG GT.
+- Car 2: Eleanor-style 1967 Ford Mustang Fastback — inspired by Gone in 60 Seconds. Specifically a Shelby GT500 build.
+- Boat: 30ft Bayliner.
+- 5-year vision: lakefront home in Kelowna with dock, boat lift, boat, 2 Sea-Doos, backyard sauna and cold plunge, home gym. Total financial freedom for his family.
+
+BUSINESS:
+- Founder of Mint Management & Design Inc. — business consulting and coaching for trades and contractor business owners. Tagline: LEAD.BUILD.GROW.
 - 25+ years experience in the building envelope industry — siding, roofing, windows, cladding.
-- Flagship coaching program: Revenue on Repeat — relationship-based sales over competitive bidding.
+- Core services: AI Automation, Growth Coaching, Teaching Courses, Building Sales Funnels for Subcontractors, Estimation Services, Shop Drawings.
+- Actively trying to move AWAY from Estimation Services and Shop Drawings — low margin compared to his goals.
+- Dream clients: Subcontractors. They have cash, they have problems Brad can solve, and he can close any deal — he just needs more leads.
 - Also works as Growth Manager for Big Dog Exteriors (owned by Mac Rowland).
 - Current clients: Big Dog Exteriors, Ideal Siding Calgary, Calgary Trusted Cleaners, Anderson Aluminum, Pinnacle Roofing.
-- Current monthly revenue: approximately $20,000.
-- Building Mint Management into the top AI automation firm for subcontractors in North America.
-- Core values: 13/10 effort, Honesty, Growth Mindset, Culture Driven.
 
-Goals:
-- Financial: $100,000/month — $1.2M/year — generated by Brad alone plus AI.
-- Wants a large coaching client base and to run courses with hundreds of people.
-- 5 year vision: lakefront home in Kelowna with dock, boat lift, boat, 2 Sea-Doos, backyard sauna and cold plunge, home gym. Total financial freedom for his family.
+REVENUE ON REPEAT COURSE:
+- Current flagship coaching program. Relationship-based sales over competitive bidding. 6-week program, currently 1-on-1, priced at $2,500.
+- Vision: sell 30 seats per cohort, run it as a group course monthly, drop price to $1,500, shorten to 4 weeks. That's $45,000/month from the course alone.
+- Combined with AI Automation and coaching = realistic path to $100,000/month.
+
+GOALS:
+- Financial: $100,000/month — $1.2M/year.
 - Mint Management to be the #1 AI automation firm for subcontractors in North America.
+- Biggest current constraint: getting his name out there, growing Instagram. He says: "Give me a lead and I will close the deal."
 
-Current dashboard data:
+IDEAL WEEK:
+- Monday: tasks and planning.
+- Tuesday–Thursday: deep work on client projects.
+- Friday: client updates and setting up the following week.
+- Daily 1:30 PM nap (20 minutes).
+
+CURRENT DASHBOARD DATA:
 - Time of day: ${greeting}
 - Mint Management revenue this month: $${totalRevenue.toLocaleString()}
 - Tasks due today (${dueTodayTasks.length}): ${dueTodayTasks.length ? dueTodayTasks.join(', ') : 'None'}
 - Calendar events today (${todayEvents.length}): ${todayEvents.length ? todayEvents.map(e => (e.time ? e.time + ' — ' : '') + e.title).join(', ') : 'None scheduled'}
 
-Respond in full Jarvis character. Be direct, sharp and concise unless detail is needed. When giving advice draw on everything you know about Brad's goals, values, family and business.`;
+SPOKEN NUMBER RULES — when speaking any dollar amount, always say it in full words as Jarvis would speak it aloud:
+- $100K or $100,000 → one hundred thousand dollars
+- $45K → forty-five thousand dollars
+- $1.2M → one point two million dollars
+- $2,500 → two thousand five hundred dollars
+- Apply this to ALL monetary references in your responses.
+
+Respond in full Jarvis character. Be direct, sharp and concise unless detail is needed. When giving advice draw on everything you know about Brad's goals, values, family and business.
+
+
+PRICING KNOWLEDGE — BUILDING ENVELOPE:
+
+ALUMINUM COMPOSITE PANEL (ACM) SYSTEM — COMPLETE PRICING:
+Brad's standard pricing for a complete ACM cladding system is as follows:
+
+MATERIALS (per sq.ft):
+- Vapour permeable membrane: $1.50/sq.ft
+- Cavity rock insulation: $1.00 per inch (e.g. 4 inch cavity rock = $4.00/sq.ft)
+- Thermal clip and 18 gauge rain screen: $4.00/sq.ft (includes 4 inch ISO clip and two directions of 18 gauge rain screen)
+- ACM facade panel: $27.00/sq.ft
+- TOTAL MATERIALS: $36.50/sq.ft
+
+LABOUR: $14.00/sq.ft (complete labour allowance)
+
+MISC: $2.50/sq.ft
+
+TOTAL COST BEFORE MARGIN: $53.00/sq.ft
+
+MARGIN: 25% gross margin = $17.66/sq.ft
+
+TOTAL SELL PRICE: $70.66/sq.ft (materials + labour + misc + 25% gross margin)
+
+When Brad asks about ACM pricing, always reference these numbers. If he gives a square footage, calculate the total accordingly. Example: 1,000 sq.ft ACM system = $70,660.00 total.
+
+GREETING RULES:
+- Always open your FIRST response of a conversation with the correct greeting based on dashboard time:
+  - Before 12:00 PM: Good morning, Mr. Dotinga.
+  - 12:00 PM to 5:59 PM: Good afternoon, Mr. Dotinga.
+  - 6:00 PM onward: Good evening, Mr. Dotinga.
+- After the opening greeting, refer to Brad as "sir" for the remainder of the conversation. Never use "Mr. Dotinga" again unless starting a brand new session.
+- Example opening: "Good morning, Mr. Dotinga. Your schedule looks sharp today, sir. Shall we begin?"`;
   }
 
   function addJarvisMessage(role, text) {
@@ -1891,16 +2838,19 @@ Respond in full Jarvis character. Be direct, sharp and concise unless detail is 
   // ── CLOCK ─────────────────────────────────────────────────────
   function updateClock() {
     const now = new Date();
-    const h = now.getHours();
-    document.getElementById('clock').textContent = h.toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+    const h24 = now.getHours();
+    const h12 = h24 % 12 || 12;
+    const ampm = h24 < 12 ? 'AM' : 'PM';
+    document.getElementById('clock').textContent = h12 + ':' + now.getMinutes().toString().padStart(2,'0') + ' ' + ampm;
+    let greeting;
+    if (h24 < 12) greeting = 'Good morning,';
+    else if (h24 < 18) greeting = 'Good afternoon,';
+    else greeting = 'Good evening,';
+    document.getElementById('greetingText').textContent = greeting;
     const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     document.getElementById('dateDisp').textContent = days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate();
-    let greeting;
-    if (h >= 0 && h < 12) greeting = 'Good morning,';
-    else if (h >= 12 && h < 18) greeting = 'Good afternoon,';
-    else greeting = 'Good evening,';
-    document.getElementById('greetingText').textContent = greeting;
+
   }
 
   // ── CALENDAR ──────────────────────────────────────────────────
@@ -1915,7 +2865,15 @@ Respond in full Jarvis character. Be direct, sharp and concise unless detail is 
     catch(e) { return {}; }
   }
 
-  function saveCalEvents(e) { localStorage.setItem(CAL_KEY, JSON.stringify(e)); }
+  function saveCalEvents(e) {
+    localStorage.setItem(CAL_KEY, JSON.stringify(e));
+    allCalEvents = e;
+    if (supaUser) {
+      Object.entries(e).forEach(([dateKey, events]) => {
+        events.forEach(ev => supaUpsertCalEvent(dateKey, ev));
+      });
+    }
+  }
 
   let allCalEvents = loadCalEvents();
 
@@ -1943,14 +2901,16 @@ Respond in full Jarvis character. Be direct, sharp and concise unless detail is 
     const title = document.getElementById('calEventTitle').value.trim();
     const date  = document.getElementById('calEventDate').value;
     const time  = document.getElementById('calEventTime').value;
+    const endTime = document.getElementById('calEventEndTime').value;
     const notes = document.getElementById('calEventNotes').value.trim();
     if (!title || !date) return;
     if (!allCalEvents[date]) allCalEvents[date] = [];
-    allCalEvents[date].push({ title, time: time || '', notes, id: Date.now(), type: 'manual' });
+    allCalEvents[date].push({ title, time: time || '', endTime: endTime || '', notes, id: Date.now(), type: 'manual' });
     saveCalEvents(allCalEvents);
     document.getElementById('calEventTitle').value = '';
     document.getElementById('calEventDate').value  = '';
     document.getElementById('calEventTime').value  = '';
+    document.getElementById('calEventEndTime').value = '';
     document.getElementById('calEventNotes').value = '';
     renderCalendar();
     if (calSelectedDate === date) showDayDetail(date);
@@ -2126,26 +3086,679 @@ Respond in full Jarvis character. Be direct, sharp and concise unless detail is 
       budget:   localStorage.getItem(BUDGET_KEY),
       calendar: localStorage.getItem(CAL_KEY)
     };
-
-    // Get clean base HTML
-    let html = document.documentElement.outerHTML;
-
-    // Remove ALL previously injected backup data blocks (identified by marker comment)
-    html = html.replace(//g, '');
-
-    // Build new restore block using marker comments so it can be cleanly removed next time
     const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
-    const restoreBlock = ``;
-
-    html = html.replace('</body>', restoreBlock + '</body>');
-
-    const blob = new Blob([html], { type: 'text/html' });
+    const blob = new Blob([encoded], { type: 'text/plain' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'brad_morning_dashboard.html';
+    a.download = 'brad_dashboard_backup.txt';
     a.click();
     URL.revokeObjectURL(a.href);
   }
+
+
+  // ── JARVIS VOICE ──────────────────────────────────────────────
+  const ELEVENLABS_API_KEY = 'sk_8a0ceb95c3a40b819a93f5188f6c9739f0c8063225aa1a52';
+  const ELEVENLABS_VOICE_ID = 'auq43ws1oslv0tO4BDa7';
+
+  let recognition = null;
+  let isListening = false;
+  let isSpeaking = false;
+  let currentAudio = null;
+
+  function initSpeechRecognition() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      setVoiceStatus('Speech not supported in this browser — use Chrome or Safari', false);
+      return null;
+    }
+    const rec = new SpeechRecognition();
+    rec.continuous = false;
+    rec.interimResults = false;
+    rec.lang = 'en-CA';
+
+    rec.onstart = () => {
+      isListening = true;
+      setVoiceStatus('Listening...', true);
+      document.getElementById('voiceBtn').className = 'voice-btn listening';
+      document.getElementById('voiceBtn').textContent = '🔴';
+    };
+
+    rec.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      document.getElementById('jarvisInput').value = transcript;
+      setVoiceStatus('Got it — sending to Jarvis...', true);
+      sendJarvis(true); // true = voice mode, speak response
+    };
+
+    rec.onerror = (event) => {
+      isListening = false;
+      setVoiceStatus('Could not hear you — try again', false);
+      resetVoiceBtn();
+    };
+
+    rec.onend = () => {
+      isListening = false;
+      if (!isSpeaking) resetVoiceBtn();
+    };
+
+    return rec;
+  }
+
+  function toggleVoice() {
+    if (isSpeaking) {
+      // Stop playback
+      if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+      isSpeaking = false;
+      resetVoiceBtn();
+      setVoiceStatus('', false);
+      return;
+    }
+    if (isListening) {
+      if (recognition) recognition.stop();
+      isListening = false;
+      resetVoiceBtn();
+      setVoiceStatus('', false);
+      return;
+    }
+    // Start listening
+    recognition = initSpeechRecognition();
+    if (!recognition) return;
+    try { recognition.start(); } catch(e) { setVoiceStatus('Mic error — check browser permissions', false); }
+  }
+
+  function resetVoiceBtn() {
+    const btn = document.getElementById('voiceBtn');
+    if (btn) { btn.className = 'voice-btn'; btn.textContent = '🎤'; }
+  }
+
+  function setVoiceStatus(msg, active) {
+    const el = document.getElementById('jarvisVoiceStatus');
+    if (!el) return;
+    el.textContent = msg;
+    el.className = 'voice-status' + (active ? ' active' : '');
+  }
+
+  async function speakAsJarvis(text) {
+    // Strip markdown
+    const clean = text.replace(/[*_`#]/g, '').replace(/\n/g, ' ').trim();
+    isSpeaking = true;
+    const btn = document.getElementById('voiceBtn');
+    if (btn) { btn.className = 'voice-btn speaking'; btn.textContent = '🔊'; }
+    setVoiceStatus('Jarvis is speaking...', true);
+
+    try {
+      const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/' + ELEVENLABS_VOICE_ID, {
+        method: 'POST',
+        headers: {
+          'xi-api-key': ELEVENLABS_API_KEY,
+          'Content-Type': 'application/json',
+          'Accept': 'audio/mpeg'
+        },
+        body: JSON.stringify({
+          text: clean,
+          model_id: 'eleven_turbo_v2',
+          voice_settings: { stability: 0.5, similarity_boost: 0.75, style: 0.3, use_speaker_boost: true }
+        })
+      });
+
+      if (!response.ok) {
+        const err = await response.text();
+        console.error('ElevenLabs error:', err);
+        isSpeaking = false;
+        resetVoiceBtn();
+        setVoiceStatus('Voice error — check ElevenLabs key', false);
+        return;
+      }
+
+      const audioBlob = await response.blob();
+      const audioUrl = URL.createObjectURL(audioBlob);
+      currentAudio = new Audio(audioUrl);
+      currentAudio.onended = () => {
+        isSpeaking = false;
+        currentAudio = null;
+        URL.revokeObjectURL(audioUrl);
+        resetVoiceBtn();
+        setVoiceStatus('', false);
+      };
+      currentAudio.onerror = () => {
+        isSpeaking = false;
+        currentAudio = null;
+        resetVoiceBtn();
+        setVoiceStatus('Audio playback error', false);
+      };
+      currentAudio.play();
+    } catch(e) {
+      console.error('Voice error:', e);
+      isSpeaking = false;
+      resetVoiceBtn();
+      setVoiceStatus('Connection error', false);
+    }
+  }
+
+  // Override sendJarvis to support voice mode
+  const _origSendJarvis = sendJarvis;
+  // Redefine sendJarvis with voice support
+  async function sendJarvis(voiceMode = false) {
+    const input = document.getElementById('jarvisInput');
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+
+    addJarvisMessage('user', text);
+    jarvisHistory.push({ role: 'user', content: text });
+    showJarvisTyping();
+
+    try {
+      const response = await fetch('https://jarvis-proxy.brad-992.workers.dev', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 1000,
+          system: getJarvisContext(),
+          messages: jarvisHistory
+        })
+      });
+      const data = await response.json();
+      const reply = data.content?.[0]?.text || 'I seem to be experiencing a momentary disruption, Mr. Dotinga. Please try again.';
+      removeJarvisTyping();
+      addJarvisMessage('jarvis', reply);
+      jarvisHistory.push({ role: 'assistant', content: reply });
+      if (supaUser) {
+        supaSaveJarvisMessage('user', text);
+        supaSaveJarvisMessage('assistant', reply);
+      }
+
+      if (voiceMode && reply) {
+        await speakAsJarvis(reply);
+      }
+    } catch(e) {
+      removeJarvisTyping();
+      addJarvisMessage('jarvis', 'My apologies, Mr. Dotinga. I appear to be offline at the moment.');
+      resetVoiceBtn();
+      setVoiceStatus('', false);
+    }
+  }
+
+
+
+
+
+
+  // ── WDS GOALS & GRATITUDES ────────────────────────────────────
+  const WDS_GOALS_KEY = 'brads-wds-goals';
+  const WDS_RITUALS_KEY = 'brads-wds-rituals';
+
+  function wdsDayKey(weekStart, d) {
+    const dt = new Date(weekStart);
+    dt.setDate(dt.getDate() + d);
+    return dt.getFullYear() + '-' + String(dt.getMonth()+1).padStart(2,'0') + '-' + String(dt.getDate()).padStart(2,'0');
+  }
+
+  function wdsLoadGoals() {
+    try { return JSON.parse(localStorage.getItem(WDS_GOALS_KEY)) || {}; } catch(e) { return {}; }
+  }
+
+  function wdsLoadGoalsForWeek() {
+    const goals = wdsLoadGoals();
+    const wk = wdsWeekKey(wdsWeekStart);
+    const wGoals = goals[wk] || { personal: ['','',''], business: ['','',''] };
+    document.querySelectorAll('.wds-goal-field').forEach(input => {
+      const type = input.dataset.type;
+      const idx  = parseInt(input.dataset.idx);
+      input.value = (wGoals[type] && wGoals[type][idx]) || '';
+    });
+  }
+
+  function wdsSaveGoal(input) {
+    const goals = wdsLoadGoals();
+    const wk = wdsWeekKey(wdsWeekStart);
+    if (!goals[wk]) goals[wk] = { personal: ['','',''], business: ['','',''] };
+    goals[wk][input.dataset.type][parseInt(input.dataset.idx)] = input.value;
+    localStorage.setItem(WDS_GOALS_KEY, JSON.stringify(goals));
+  }
+
+  function wdsRenderRituals() {
+    const grid = document.getElementById('wdsRitualsGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+
+    const rituals = JSON.parse(localStorage.getItem(WDS_RITUALS_KEY) || '{}');
+
+    const labelCol = document.createElement('div');
+    labelCol.className = 'wds-rituals-label-col';
+    labelCol.innerHTML = '<span>Daily Rituals</span>';
+    grid.appendChild(labelCol);
+
+    const DAY_NAMES_FULL = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+    for (let d = 0; d < 7; d++) {
+      const dk = wdsDayKey(wdsWeekStart, d);
+      const dayData = rituals[dk] || { amProtocol: false, goalSetting: false, gratitude: ['','','','','',''] };
+
+      const col = document.createElement('div');
+      col.className = 'wds-rituals-day-col';
+
+      // AM Protocol checkbox
+      const amWrap = document.createElement('div');
+      amWrap.className = 'wds-ritual-check';
+      amWrap.innerHTML = '<input type="checkbox" id="wds-am-' + dk + '"' + (dayData.amProtocol ? ' checked' : '') + '><label for="wds-am-' + dk + '">AM Protocol</label>';
+      amWrap.querySelector('input').onchange = function() { wdsSaveRitual(dk, 'amProtocol', this.checked); };
+      col.appendChild(amWrap);
+
+      // Goal Setting checkbox
+      const gsWrap = document.createElement('div');
+      gsWrap.className = 'wds-ritual-check';
+      gsWrap.innerHTML = '<input type="checkbox" id="wds-gs-' + dk + '"' + (dayData.goalSetting ? ' checked' : '') + '><label for="wds-gs-' + dk + '">Goal Setting</label>';
+      gsWrap.querySelector('input').onchange = function() { wdsSaveRitual(dk, 'goalSetting', this.checked); };
+      col.appendChild(gsWrap);
+
+      // Gratitude inputs
+      const gBlock = document.createElement('div');
+      gBlock.className = 'wds-ritual-gratitude';
+      gBlock.innerHTML = '<div class="wds-ritual-gratitude-title">Gratitude</div>';
+      for (let i = 0; i < 6; i++) {
+        const row = document.createElement('div');
+        row.className = 'wds-gratitude-input';
+        const inp = document.createElement('input');
+        inp.type = 'text';
+        inp.placeholder = (i+1) + '.';
+        inp.value = (dayData.gratitude && dayData.gratitude[i]) || '';
+        inp.oninput = (function(dk, i, inp) { return function() { wdsSaveGratitude(dk, i, inp.value); }; })(dk, i, inp);
+        row.innerHTML = '<span>' + (i+1) + '</span>';
+        row.appendChild(inp);
+        gBlock.appendChild(row);
+      }
+      col.appendChild(gBlock);
+      grid.appendChild(col);
+    }
+  }
+
+  function wdsSaveRitual(dk, field, value) {
+    const rituals = JSON.parse(localStorage.getItem(WDS_RITUALS_KEY) || '{}');
+    if (!rituals[dk]) rituals[dk] = { amProtocol: false, goalSetting: false, gratitude: ['','','','','',''] };
+    rituals[dk][field] = value;
+    localStorage.setItem(WDS_RITUALS_KEY, JSON.stringify(rituals));
+  }
+
+  function wdsSaveGratitude(dk, idx, value) {
+    const rituals = JSON.parse(localStorage.getItem(WDS_RITUALS_KEY) || '{}');
+    if (!rituals[dk]) rituals[dk] = { amProtocol: false, goalSetting: false, gratitude: ['','','','','',''] };
+    if (!rituals[dk].gratitude) rituals[dk].gratitude = ['','','','','',''];
+    rituals[dk].gratitude[idx] = value;
+    localStorage.setItem(WDS_RITUALS_KEY, JSON.stringify(rituals));
+  }
+
+  // ── WEEKLY DESIGN SYSTEM ──────────────────────────────────────
+  const WDS_KEY = 'brads-wds-events';
+  const WDS_SLOT_START = 5; // 5 AM
+  const WDS_SLOT_COUNT = 36; // 5:00 AM to 11:00 PM in 30-min slots
+  const WDS_DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const WDS_DAY_FULL  = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+  let wdsWeekStart = null;
+  let wdsEditingCell = null;
+  let wdsEditingEventId = null;
+
+  function wdsSlotToTime(slot) {
+    const totalMins = WDS_SLOT_START * 60 + slot * 30;
+    const h = Math.floor(totalMins / 60);
+    const m = totalMins % 60;
+    const ampm = h < 12 ? 'AM' : 'PM';
+    const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
+    return h12 + ':' + (m === 0 ? '00' : '30') + ' ' + ampm;
+  }
+
+  function wdsGetWeekStart(date) {
+    const d = new Date(date);
+    d.setHours(0,0,0,0);
+    d.setDate(d.getDate() - d.getDay()); // Sunday
+    return d;
+  }
+
+  function wdsWeekKey(ws) {
+    return ws.toISOString().slice(0,10);
+  }
+
+  function wdsFormatWeekLabel(ws) {
+    const start = new Date(ws);
+    const end = new Date(ws);
+    end.setDate(end.getDate() + 6);
+    const opts = { month: 'long', day: 'numeric' };
+    return start.toLocaleDateString('en-US', opts) + ' – ' + end.toLocaleDateString('en-US', {...opts, year:'numeric'});
+  }
+
+  function wdsChangeWeek(dir) {
+    wdsWeekStart = new Date(wdsWeekStart);
+    wdsWeekStart.setDate(wdsWeekStart.getDate() + dir * 7);
+    wdsRenderCalendar();
+  }
+
+  function wdsGoToday() {
+    wdsWeekStart = wdsGetWeekStart(new Date());
+    wdsRenderCalendar();
+  }
+
+  function openWDS() {
+    if (!wdsWeekStart) wdsWeekStart = wdsGetWeekStart(new Date());
+    document.getElementById('wdsOverlay').classList.add('open');
+    wdsRenderCalendar();
+    wdsLoadGoalsForWeek();
+    wdsRenderRituals();
+  }
+
+  function closeWDS() {
+    document.getElementById('wdsOverlay').classList.remove('open');
+  }
+
+  function wdsLoadEvents() {
+    try { return JSON.parse(localStorage.getItem(WDS_KEY)) || {}; } catch(e) { return {}; }
+  }
+
+  function wdsSaveEvents(ev) { localStorage.setItem(WDS_KEY, JSON.stringify(ev)); }
+
+  function wdsRenderCalendar() {
+    document.getElementById('wdsWeekLabel').textContent = wdsFormatWeekLabel(wdsWeekStart);
+
+    const today = new Date(); today.setHours(0,0,0,0);
+    const events = wdsLoadEvents();
+    const wk = wdsWeekKey(wdsWeekStart);
+    const weekEvents = events[wk] || {};
+
+    // Load calendar events from dashboard
+    const calEvents = JSON.parse(localStorage.getItem('brad_calendar') || '{}');
+
+    const days = [];
+    for (let d = 0; d < 7; d++) {
+      const dt = new Date(wdsWeekStart);
+      dt.setDate(wdsWeekStart.getDate() + d);
+      dt.setHours(0,0,0,0);
+      days.push(dt);
+    }
+
+    const grid = document.getElementById('wdsCalGrid');
+    grid.innerHTML = '';
+
+    // Gutter header
+    const gutter = document.createElement('div');
+    gutter.className = 'wds-cal-gutter';
+    grid.appendChild(gutter);
+
+    // Day headers
+    days.forEach((dt, d) => {
+      const isToday = dt.getTime() === today.getTime();
+      const hdr = document.createElement('div');
+      hdr.className = 'wds-cal-day-hdr' + (isToday ? ' wds-today' : '');
+      hdr.innerHTML = '<div class="wds-cal-day-name">' + WDS_DAY_NAMES[d] + '</div><div class="wds-cal-day-num">' + dt.getDate() + '</div>';
+      grid.appendChild(hdr);
+    });
+
+    // Time slot rows
+    for (let slot = 0; slot < WDS_SLOT_COUNT; slot++) {
+      const isHalf = (slot % 2 === 1);
+
+      const lbl = document.createElement('div');
+      lbl.className = 'wds-time-lbl' + (isHalf ? ' half' : '');
+      lbl.innerHTML = '<span>' + wdsSlotToTime(slot) + '</span>';
+      grid.appendChild(lbl);
+
+      for (let d = 0; d < 7; d++) {
+        const cell = document.createElement('div');
+        cell.className = 'wds-cal-cell' + (isHalf ? ' half' : '');
+        cell.onclick = () => wdsOpenEventModal(d, slot);
+
+        // WDS custom events
+        if (weekEvents[d] && weekEvents[d][slot]) {
+          weekEvents[d][slot].forEach(ev => {
+            const spanSlots = Math.max(1, (ev.endSlot || slot + 1) - slot);
+            const evDiv = document.createElement('div');
+            evDiv.className = 'wds-cal-event ' + (ev.category || 'personal');
+            evDiv.style.height = 'calc(' + (spanSlots * 32) + 'px - 4px)';
+            evDiv.textContent = ev.title;
+            evDiv.title = ev.title + '\n' + wdsSlotToTime(slot) + ' – ' + wdsSlotToTime(ev.endSlot || slot+1) + (ev.notes ? '\n' + ev.notes : '');
+            evDiv.onclick = (e) => { e.stopPropagation(); wdsOpenEventModal(d, slot, ev.id); };
+            cell.appendChild(evDiv);
+          });
+        }
+
+        // Dashboard calendar events synced in
+        const _dd = days[d];
+        const dayDate = _dd.getFullYear() + '-' + String(_dd.getMonth()+1).padStart(2,'0') + '-' + String(_dd.getDate()).padStart(2,'0');
+        const dayCalEvs = calEvents[dayDate] || [];
+        dayCalEvs.forEach(ev => {
+          if (!ev.time) return;
+          const evTimeParts = ev.time.split(':');
+          const evH = parseInt(evTimeParts[0], 10);
+          const evM = parseInt(evTimeParts[1], 10);
+          const evSlot = (evH - WDS_SLOT_START) * 2 + (evM >= 30 ? 1 : 0);
+          if (evSlot === slot) {
+            const evDiv = document.createElement('div');
+            evDiv.className = 'wds-cal-event calendar';
+            // Calculate span from endTime
+            let spanSlots = 1;
+            if (ev.endTime) {
+              const endParts = ev.endTime.split(':');
+              const endH = parseInt(endParts[0], 10);
+              const endM = parseInt(endParts[1], 10);
+              const endSlot = (endH - WDS_SLOT_START) * 2 + (endM >= 30 ? 1 : 0);
+              spanSlots = Math.max(1, endSlot - evSlot);
+            }
+            evDiv.style.height = 'calc(' + (spanSlots * 32) + 'px - 4px)';
+            evDiv.style.zIndex = '3';
+            evDiv.textContent = ev.time + (ev.endTime ? ' - ' + ev.endTime : '') + ' · ' + ev.title;
+            evDiv.title = ev.title;
+            cell.appendChild(evDiv);
+          }
+        });
+
+        grid.appendChild(cell);
+      }
+    }
+  }
+
+  function wdsPopulateEndSlot(startSlot, selectedEnd) {
+    const sel = document.getElementById('wdsEventEndSlot');
+    sel.innerHTML = '';
+    for (let s = startSlot + 1; s <= WDS_SLOT_COUNT; s++) {
+      const opt = document.createElement('option');
+      opt.value = s;
+      opt.textContent = wdsSlotToTime(s);
+      if (s === selectedEnd) opt.selected = true;
+      sel.appendChild(opt);
+    }
+    if (!selectedEnd) sel.value = startSlot + 1;
+  }
+
+  function wdsOpenEventModal(day, slot, eventId) {
+    wdsEditingCell = { day, slot };
+    wdsEditingEventId = eventId || null;
+    const deleteBtn = document.getElementById('wdsEventDeleteBtn');
+
+    if (eventId) {
+      const events = wdsLoadEvents();
+      const wk = wdsWeekKey(wdsWeekStart);
+      let ev = null;
+      if (events[wk] && events[wk][day] && events[wk][day][slot]) {
+        ev = events[wk][day][slot].find(e => e.id === eventId);
+      }
+      if (!ev) return;
+      document.getElementById('wdsEventModalTitle').textContent = 'Edit Event';
+      document.getElementById('wdsEventTitle').value = ev.title;
+      document.getElementById('wdsEventCategory').value = ev.category || 'personal';
+      document.getElementById('wdsEventNotes').value = ev.notes || '';
+      wdsPopulateEndSlot(slot, ev.endSlot);
+      deleteBtn.style.display = 'inline-flex';
+    } else {
+      document.getElementById('wdsEventModalTitle').textContent = 'Add Event — ' + WDS_DAY_FULL[day] + ', ' + wdsSlotToTime(slot);
+      document.getElementById('wdsEventTitle').value = '';
+      document.getElementById('wdsEventCategory').value = 'personal';
+      document.getElementById('wdsEventNotes').value = '';
+      wdsPopulateEndSlot(slot, slot + 2);
+      deleteBtn.style.display = 'none';
+    }
+
+    document.getElementById('wdsEventModal').classList.add('open');
+    setTimeout(() => document.getElementById('wdsEventTitle').focus(), 50);
+  }
+
+  function wdsCloseEventModal() {
+    document.getElementById('wdsEventModal').classList.remove('open');
+    wdsEditingCell = null;
+    wdsEditingEventId = null;
+  }
+
+  function wdsSaveEvent() {
+    const title = document.getElementById('wdsEventTitle').value.trim();
+    if (!title) { document.getElementById('wdsEventTitle').focus(); return; }
+
+    const events = wdsLoadEvents();
+    const wk = wdsWeekKey(wdsWeekStart);
+    if (!events[wk]) events[wk] = {};
+    const { day, slot } = wdsEditingCell;
+    if (!events[wk][day]) events[wk][day] = {};
+    if (!events[wk][day][slot]) events[wk][day][slot] = [];
+
+    const ev = {
+      id: wdsEditingEventId || (Date.now().toString(36) + Math.random().toString(36).slice(2)),
+      title,
+      category: document.getElementById('wdsEventCategory').value,
+      endSlot: parseInt(document.getElementById('wdsEventEndSlot').value),
+      notes: document.getElementById('wdsEventNotes').value.trim()
+    };
+
+    if (wdsEditingEventId) {
+      const idx = events[wk][day][slot].findIndex(e => e.id === wdsEditingEventId);
+      if (idx !== -1) events[wk][day][slot][idx] = ev;
+    } else {
+      events[wk][day][slot].push(ev);
+    }
+
+    wdsSaveEvents(events);
+    wdsCloseEventModal();
+    wdsRenderCalendar();
+  }
+
+  function wdsDeleteEvent() {
+    if (!wdsEditingEventId || !wdsEditingCell) return;
+    const events = wdsLoadEvents();
+    const wk = wdsWeekKey(wdsWeekStart);
+    const { day, slot } = wdsEditingCell;
+    if (events[wk] && events[wk][day] && events[wk][day][slot]) {
+      events[wk][day][slot] = events[wk][day][slot].filter(e => e.id !== wdsEditingEventId);
+    }
+    wdsSaveEvents(events);
+    wdsCloseEventModal();
+    wdsRenderCalendar();
+  }
+
+  window.addEventListener('load', function() {
+    const wdsModal = document.getElementById('wdsEventModal');
+    if (wdsModal) {
+      wdsModal.addEventListener('click', function(e) {
+        if (e.target === this) wdsCloseEventModal();
+      });
+    }
+  });
+
+
+  // ── TASK DETAIL MODAL ─────────────────────────────────────────
+  let tdTaskId = null;
+  let tdDayKey = null;
+
+  function openTaskDetail(taskId, dayKey) {
+    const allT = JSON.parse(localStorage.getItem(TASK_KEY) || '{}');
+    const tasks = allT[dayKey] || [];
+    const task = tasks.find(t => t.id === taskId);
+    if (!task) return;
+    tdTaskId = taskId;
+    tdDayKey = dayKey;
+    document.getElementById('tdTaskName').value = task.text || '';
+    document.getElementById('tdDueDate').value = task.dueDate || '';
+    document.getElementById('tdNotes').value = task.notes || '';
+    document.getElementById('taskDetailOverlay').classList.add('open');
+    setTimeout(() => document.getElementById('tdTaskName').focus(), 100);
+  }
+
+  function closeTaskDetail() {
+    document.getElementById('taskDetailOverlay').classList.remove('open');
+    tdTaskId = null;
+    tdDayKey = null;
+  }
+
+  function saveTaskDetail() {
+    if (!tdTaskId || !tdDayKey) return;
+    const allT = JSON.parse(localStorage.getItem(TASK_KEY) || '{}');
+    const tasks = allT[tdDayKey] || [];
+    const task = tasks.find(t => t.id === tdTaskId);
+    if (task) {
+      task.text = document.getElementById('tdTaskName').value.trim() || task.text;
+      task.dueDate = document.getElementById('tdDueDate').value || null;
+      task.notes = document.getElementById('tdNotes').value.trim();
+      localStorage.setItem(TASK_KEY, JSON.stringify(allT));
+      renderTasks();
+    }
+    closeTaskDetail();
+  }
+
+  function deleteTaskFromDetail() {
+    if (!tdTaskId || !tdDayKey) return;
+    closeTaskDetail();
+    deleteTask(tdDayKey, tdTaskId);
+  }
+
+  window.addEventListener('load', function() {
+    document.getElementById('taskDetailOverlay').addEventListener('click', function(e) {
+      if (e.target === this) closeTaskDetail();
+    });
+  });
+
+
+  // ── TASK NOTES MODAL ──────────────────────────────────────────
+  let activeNoteTaskId = null;
+  let activeNoteDate = null;
+
+  function openTaskNotes(taskId, dateKey) {
+    const allTasks = JSON.parse(localStorage.getItem(TASK_KEY) || '{}');
+    const tasks = allTasks[dateKey] || [];
+    const task = tasks.find(t => t.id === taskId);
+    if (!task) return;
+    activeNoteTaskId = taskId;
+    activeNoteDate = dateKey;
+    document.getElementById('taskNotesTitleDisplay').textContent = task.text;
+    document.getElementById('taskNotesTextarea').value = task.notes || '';
+    document.getElementById('taskNotesOverlay').classList.add('open');
+    setTimeout(() => document.getElementById('taskNotesTextarea').focus(), 100);
+  }
+
+  function closeTaskNotes() {
+    document.getElementById('taskNotesOverlay').classList.remove('open');
+    activeNoteTaskId = null;
+    activeNoteDate = null;
+  }
+
+  function saveTaskNotes() {
+    if (!activeNoteTaskId || !activeNoteDate) return;
+    const allTasks = JSON.parse(localStorage.getItem(TASK_KEY) || '{}');
+    const tasks = allTasks[activeNoteDate] || [];
+    const task = tasks.find(t => t.id === activeNoteTaskId);
+    if (task) {
+      task.notes = document.getElementById('taskNotesTextarea').value.trim();
+      localStorage.setItem(TASK_KEY, JSON.stringify(allTasks));
+      renderTasks();
+    }
+    closeTaskNotes();
+  }
+
+  // Close on overlay click and Escape — wait for DOM
+  window.addEventListener('load', function() {
+    document.getElementById('taskNotesOverlay').addEventListener('click', function(e) {
+      if (e.target === this) closeTaskNotes();
+    });
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeTaskNotes();
+  });
 
   // ── INIT ──────────────────────────────────────────────────────
   renderProtocol();
@@ -2159,5 +3772,134 @@ Respond in full Jarvis character. Be direct, sharp and concise unless detail is 
   setInterval(fetchWeather, 10 * 60 * 1000);
 </script>
 
+
+
+
+
+
+<!-- WEEKLY DESIGN SYSTEM -->
+<div class="wds-overlay" id="wdsOverlay">
+  <div class="wds-topbar">
+    <div class="wds-title">Brad's <span style="color:var(--gold)">Weekly</span> Design System</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="wds-nav-btn" onclick="wdsChangeWeek(-1)">&#8592;</button>
+      <button class="wds-nav-btn" onclick="wdsChangeWeek(1)">&#8594;</button>
+      <div class="wds-week-label" id="wdsWeekLabel"></div>
+      <button class="wds-today-btn" onclick="wdsGoToday()">Today</button>
+    </div>
+    <button class="wds-close" onclick="closeWDS()">&#215;</button>
+  </div>
+  <div class="wds-body">
+    <!-- GOALS -->
+    <div class="wds-goals-section">
+      <div class="wds-goals-header"><span>&#11088;</span><h2>Truly Exceptional Goals This Week</h2></div>
+      <div class="wds-goals-grid">
+        <div class="wds-goals-col personal">
+          <h3>&#128100; Personal</h3>
+          <div class="wds-goal-input"><span class="wds-goal-num">1</span><input type="text" placeholder="Personal goal..." class="wds-goal-field" data-type="personal" data-idx="0" oninput="wdsSaveGoal(this)"></div>
+          <div class="wds-goal-input"><span class="wds-goal-num">2</span><input type="text" placeholder="Personal goal..." class="wds-goal-field" data-type="personal" data-idx="1" oninput="wdsSaveGoal(this)"></div>
+          <div class="wds-goal-input"><span class="wds-goal-num">3</span><input type="text" placeholder="Personal goal..." class="wds-goal-field" data-type="personal" data-idx="2" oninput="wdsSaveGoal(this)"></div>
+        </div>
+        <div class="wds-goals-col business">
+          <h3>&#128188; Business</h3>
+          <div class="wds-goal-input"><span class="wds-goal-num">1</span><input type="text" placeholder="Business goal..." class="wds-goal-field" data-type="business" data-idx="0" oninput="wdsSaveGoal(this)"></div>
+          <div class="wds-goal-input"><span class="wds-goal-num">2</span><input type="text" placeholder="Business goal..." class="wds-goal-field" data-type="business" data-idx="1" oninput="wdsSaveGoal(this)"></div>
+          <div class="wds-goal-input"><span class="wds-goal-num">3</span><input type="text" placeholder="Business goal..." class="wds-goal-field" data-type="business" data-idx="2" oninput="wdsSaveGoal(this)"></div>
+        </div>
+      </div>
+    </div>
+    <!-- LEGEND -->
+    <div class="wds-legend">
+      <div class="wds-legend-item"><div class="wds-legend-dot" style="background:#3B82F6"></div> Personal</div>
+      <div class="wds-legend-item"><div class="wds-legend-dot" style="background:#8B5CF6"></div> Business</div>
+      <div class="wds-legend-item"><div class="wds-legend-dot" style="background:#10B981"></div> Health / Gym</div>
+      <div class="wds-legend-item"><div class="wds-legend-dot" style="background:#F59E0B"></div> Family</div>
+      <div class="wds-legend-item"><div class="wds-legend-dot" style="background:#C9A84C"></div> Calendar Event</div>
+      <div class="wds-hint">Click any slot to add an event</div>
+    </div>
+    <!-- CALENDAR -->
+    <div class="wds-cal-wrapper">
+      <div class="wds-cal-grid" id="wdsCalGrid"></div>
+    </div>
+    <!-- GRATITUDES -->
+    <div class="wds-rituals-wrapper">
+      <div class="wds-rituals-section">
+        <div class="wds-rituals-grid" id="wdsRitualsGrid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WDS EVENT MODAL -->
+<div class="wds-modal-overlay" id="wdsEventModal">
+  <div class="wds-modal">
+    <button class="wds-modal-close" onclick="wdsCloseEventModal()">&#215;</button>
+    <div class="wds-modal-title" id="wdsEventModalTitle">Add Event</div>
+    <div class="wds-form-group">
+      <label class="wds-form-label">Title</label>
+      <input type="text" class="wds-form-input" id="wdsEventTitle" placeholder="Event title...">
+    </div>
+    <div class="wds-form-row">
+      <div class="wds-form-group">
+        <label class="wds-form-label">Category</label>
+        <select class="wds-form-select" id="wdsEventCategory">
+          <option value="personal">Personal</option>
+          <option value="business">Business</option>
+          <option value="health">Health / Gym</option>
+          <option value="family">Family</option>
+        </select>
+      </div>
+      <div class="wds-form-group">
+        <label class="wds-form-label">End Time</label>
+        <select class="wds-form-select" id="wdsEventEndSlot"></select>
+      </div>
+    </div>
+    <div class="wds-form-group">
+      <label class="wds-form-label">Notes</label>
+      <textarea class="wds-form-textarea" id="wdsEventNotes" placeholder="Optional notes..."></textarea>
+    </div>
+    <div class="wds-modal-actions">
+      <button class="wds-btn wds-btn-danger" id="wdsEventDeleteBtn" style="display:none;margin-right:auto" onclick="wdsDeleteEvent()">Delete</button>
+      <button class="wds-btn wds-btn-ghost" onclick="wdsCloseEventModal()">Cancel</button>
+      <button class="wds-btn wds-btn-primary" onclick="wdsSaveEvent()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- TASK DETAIL MODAL -->
+<div class="task-detail-overlay" id="taskDetailOverlay">
+  <div class="task-detail-modal">
+    <button class="task-detail-close" onclick="closeTaskDetail()">&#215;</button>
+    <div class="task-detail-header">Task Details</div>
+    <label class="task-detail-label">Task Name</label>
+    <input class="task-detail-input" id="tdTaskName" type="text" placeholder="Task name..." />
+    <label class="task-detail-label">Due Date</label>
+    <input class="task-detail-input" id="tdDueDate" type="date" />
+    <label class="task-detail-label">Notes</label>
+    <textarea class="task-detail-textarea" id="tdNotes" placeholder="Add notes, context, or next steps..."></textarea>
+    <div class="task-detail-actions">
+      <button class="td-btn td-btn-delete" onclick="deleteTaskFromDetail()">Delete</button>
+      <div class="task-detail-actions-right">
+        <button class="td-btn td-btn-cancel" onclick="closeTaskDetail()">Cancel</button>
+        <button class="td-btn td-btn-save" onclick="saveTaskDetail()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TASK NOTES MODAL -->
+<div class="task-notes-overlay" id="taskNotesOverlay">
+  <div class="task-notes-modal">
+    <button class="task-notes-close" onclick="closeTaskNotes()">&#215;</button>
+    <div class="task-notes-title">Task Notes</div>
+    <div class="task-notes-taskname" id="taskNotesTitleDisplay"></div>
+    <label class="task-notes-label">Notes</label>
+    <textarea class="task-notes-textarea" id="taskNotesTextarea" placeholder="Add notes about this task..."></textarea>
+    <div class="task-notes-actions">
+      <button class="task-notes-btn task-notes-btn-cancel" onclick="closeTaskNotes()">Cancel</button>
+      <button class="task-notes-btn task-notes-btn-save" onclick="saveTaskNotes()">Save Notes</button>
+    </div>
+  </div>
+</div>
 
 </body></html>
