@@ -2015,11 +2015,12 @@
       promise,
       new Promise(resolve => setTimeout(() => resolve(null), ms))
     ]);
-    const [tasks, revenue, calendar, memory] = await Promise.all([
+    const [tasks, revenue, calendar, memory, budgetRow] = await Promise.all([
       withTimeout(supaLoadTasks(), 8000),
       withTimeout(supaLoadRevenue(), 8000),
       withTimeout(supaLoadCalendar(), 8000),
-      withTimeout(supaLoadJarvisMemory(), 8000)
+      withTimeout(supaLoadJarvisMemory(), 8000),
+      withTimeout(supa.from('budget').select('data').eq('user_id', supaUser.id).single().then(r => r.data?.data || null), 8000)
     ]);
 
     // Load from Supabase - no seeding
@@ -2041,6 +2042,11 @@
     if (memory && memory.length > 0) {
       jarvisHistory.length = 0;
       memory.forEach(m => jarvisHistory.push(m));
+    }
+
+    if (budgetRow) {
+      allBudget = budgetRow;
+      localStorage.setItem(BUDGET_KEY, JSON.stringify(allBudget));
     }
 
     // Small delay for mobile Safari DOM settlement
@@ -2431,7 +2437,14 @@
     catch(e) { return { business: { income: [], expenses: [] }, personal: { income: [], expenses: [] } }; }
   }
 
-  function saveBudget(b) { localStorage.setItem(BUDGET_KEY, JSON.stringify(b)); }
+  function saveBudget(b) {
+    localStorage.setItem(BUDGET_KEY, JSON.stringify(b));
+    allBudget = b;
+    if (supaUser) {
+      supa.from('budget').upsert({ user_id: supaUser.id, data: b, updated_at: new Date().toISOString() })
+        .then(({ error }) => { if (error) console.error('saveBudget:', error); });
+    }
+  }
 
   let allBudget = loadBudget();
 
