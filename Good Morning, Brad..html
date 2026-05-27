@@ -2044,17 +2044,13 @@
       supaLoadJarvisMemory()
     ]);
 
-    // Seed if empty
-    if (tasks !== null && Object.keys(tasks).length === 0) {
-      await seedSupabaseTasks();
-    } else if (tasks !== null) {
+    // Load from Supabase - no seeding
+    if (tasks !== null) {
       allTasks = tasks;
       localStorage.setItem(TASK_KEY, JSON.stringify(allTasks));
     }
 
-    if (revenue !== null && Object.keys(revenue).length === 0) {
-      await seedSupabaseRevenue();
-    } else if (revenue !== null) {
+    if (revenue !== null) {
       allRevenue = revenue;
       localStorage.setItem(REV_KEY, JSON.stringify(allRevenue));
     }
@@ -2071,30 +2067,6 @@
     // Small delay for mobile Safari DOM settlement
     setTimeout(() => renderAll(), 100);
   }
-
-  async function seedSupabaseTasks() {
-    // Push seed tasks to Supabase
-    const seedTasks = JSON.parse(localStorage.getItem(TASK_KEY) || '{}');
-    for (const [dayKey, tasks] of Object.entries(seedTasks)) {
-      for (const task of tasks) {
-        await supaUpsertTask(dayKey, task);
-      }
-    }
-    const loaded = await supaLoadTasks();
-    if (loaded) { allTasks = loaded; localStorage.setItem(TASK_KEY, JSON.stringify(allTasks)); }
-  }
-
-  async function seedSupabaseRevenue() {
-    const seedRev = JSON.parse(localStorage.getItem(REV_KEY) || '{}');
-    for (const [monthKey, entries] of Object.entries(seedRev)) {
-      for (const entry of entries) {
-        await supaUpsertRevenue(monthKey, entry);
-      }
-    }
-    const loaded = await supaLoadRevenue();
-    if (loaded) { allRevenue = loaded; localStorage.setItem(REV_KEY, JSON.stringify(allRevenue)); }
-  }
-
   function renderAll() {
     renderProtocol();
     renderTasks();
@@ -2120,22 +2092,6 @@
     "Answer any emails needed",
     "Start my tasks for the day"
   ];
-
-  // ── SEED DATA ON FIRST LOAD ───────────────────────────────────
-  (function seedIfEmpty() {
-    const TKEY = 'brad_tasks';
-    const RKEY = 'brad_revenue';
-    const CKEY = 'brad_calendar';
-    if (localStorage.getItem(TKEY)) return; // already seeded
-
-    const tasks = {};
-    const revenue = {};
-    const calendar = {};
-
-    localStorage.setItem(TKEY, JSON.stringify(tasks));
-    localStorage.setItem(RKEY, JSON.stringify(revenue));
-    localStorage.setItem(CKEY, JSON.stringify(calendar));
-  })();
 
   const PROTO_KEY = 'brad_protocol';
   const TASK_KEY  = 'brad_tasks';
