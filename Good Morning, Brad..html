@@ -2974,33 +2974,63 @@ GREETING RULES:
     return [...manual, ...tasks].sort((a, b) => (a.time || '99').localeCompare(b.time || '99'));
   }
 
+  let _calEditDateStr = null;
+  let _calEditId = null;
+
   function editCalEvent(dateStr, id) {
     const events = allCalEvents[dateStr] || [];
     const ev = events.find(e => e.id === id);
     if (!ev) return;
-    const newTitle = prompt('Edit title:', ev.title);
-    if (newTitle === null) return;
-    const newDate  = prompt('Edit date (YYYY-MM-DD):', dateStr);
-    if (newDate === null) return;
-    const newTime  = prompt('Edit time (HH:MM, 24hr) or leave blank:', ev.time);
-    if (newTime === null) return;
-    const newNotes = prompt('Edit notes:', ev.notes);
-    if (newNotes === null) return;
-    if (!newTitle.trim()) return;
+    _calEditDateStr = dateStr;
+    _calEditId = id;
+    document.getElementById('calEditTitle').value = ev.title || '';
+    document.getElementById('calEditDate').value = dateStr;
+    document.getElementById('calEditTime').value = ev.time || '';
+    document.getElementById('calEditEndTime').value = ev.endTime || '';
+    document.getElementById('calEditNotes').value = ev.notes || '';
+    document.getElementById('calEditOverlay').style.display = 'flex';
+    setTimeout(() => document.getElementById('calEditTitle').focus(), 50);
+  }
+
+  function closeCalEdit() {
+    document.getElementById('calEditOverlay').style.display = 'none';
+    _calEditDateStr = null;
+    _calEditId = null;
+  }
+
+  function saveCalEdit() {
+    if (!_calEditDateStr || !_calEditId) return;
+    const newTitle = document.getElementById('calEditTitle').value.trim();
+    if (!newTitle) return;
+    const newDate = document.getElementById('calEditDate').value || _calEditDateStr;
+    const newTime = document.getElementById('calEditTime').value;
+    const newEndTime = document.getElementById('calEditEndTime').value;
+    const newNotes = document.getElementById('calEditNotes').value.trim();
 
     // Remove from old date
-    allCalEvents[dateStr] = events.filter(e => e.id !== id);
-    if (!allCalEvents[dateStr].length) delete allCalEvents[dateStr];
+    allCalEvents[_calEditDateStr] = (allCalEvents[_calEditDateStr] || []).filter(e => e.id !== _calEditId);
+    if (!allCalEvents[_calEditDateStr].length) delete allCalEvents[_calEditDateStr];
 
-    // Add to new date (in case date changed)
-    const targetDate = newDate.trim() || dateStr;
-    if (!allCalEvents[targetDate]) allCalEvents[targetDate] = [];
-    allCalEvents[targetDate].push({ title: newTitle.trim(), time: newTime.trim(), notes: newNotes.trim(), id: Date.now(), type: 'manual' });
+    // Add to new date
+    if (!allCalEvents[newDate]) allCalEvents[newDate] = [];
+    const updatedEv = { title: newTitle, time: newTime, endTime: newEndTime, notes: newNotes, id: _calEditId, type: 'manual' };
+    allCalEvents[newDate].push(updatedEv);
 
     saveCalEvents(allCalEvents);
+    if (supaUser) {
+      supaDeleteCalEvent(_calEditId);
+      supaUpsertCalEvent(newDate, updatedEv);
+    }
     renderCalendar();
-    showDayDetail(targetDate);
+    showDayDetail(newDate);
     updateCalBadge();
+    closeCalEdit();
+  }
+
+  function deleteCalFromModal() {
+    if (!_calEditDateStr || !_calEditId) return;
+    closeCalEdit();
+    deleteCalEvent(_calEditDateStr, _calEditId);
   }
 
   function showDayDetail(dateStr) {
@@ -3929,6 +3959,38 @@ GREETING RULES:
     <div class="task-notes-actions">
       <button class="task-notes-btn task-notes-btn-cancel" onclick="closeTaskNotes()">Cancel</button>
       <button class="task-notes-btn task-notes-btn-save" onclick="saveTaskNotes()">Save Notes</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- CALENDAR EDIT MODAL -->
+<div class="task-detail-overlay" id="calEditOverlay" style="display:none;">
+  <div class="task-detail-modal">
+    <button class="task-detail-close" onclick="closeCalEdit()">&#215;</button>
+    <div class="task-detail-header">Edit Event</div>
+    <label class="task-detail-label">Event Title</label>
+    <input class="task-detail-input" id="calEditTitle" type="text" placeholder="Event title..." />
+    <label class="task-detail-label">Date</label>
+    <input class="task-detail-input" id="calEditDate" type="date" />
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div>
+        <label class="task-detail-label">Start Time</label>
+        <input class="task-detail-input" id="calEditTime" type="time" />
+      </div>
+      <div>
+        <label class="task-detail-label">End Time</label>
+        <input class="task-detail-input" id="calEditEndTime" type="time" />
+      </div>
+    </div>
+    <label class="task-detail-label">Notes</label>
+    <textarea class="task-detail-textarea" id="calEditNotes" placeholder="Optional notes..."></textarea>
+    <div class="task-detail-actions">
+      <button class="td-btn td-btn-delete" onclick="deleteCalFromModal()" style="margin-right:auto;">Delete</button>
+      <div class="task-detail-actions-right">
+        <button class="td-btn td-btn-cancel" onclick="closeCalEdit()">Cancel</button>
+        <button class="td-btn td-btn-save" onclick="saveCalEdit()">Save</button>
+      </div>
     </div>
   </div>
 </div>
