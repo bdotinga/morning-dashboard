@@ -2038,8 +2038,9 @@
       localStorage.setItem(CAL_KEY, JSON.stringify(allCalEvents));
     }
 
-    if (memory.length > 0) {
-      jarvisHistory = memory;
+    if (memory && memory.length > 0) {
+      jarvisHistory.length = 0;
+      memory.forEach(m => jarvisHistory.push(m));
     }
 
     // Small delay for mobile Safari DOM settlement
@@ -2528,7 +2529,7 @@
   }
 
   // ── JARVIS ────────────────────────────────────────────────────
-  const jarvisHistory = [];
+  let jarvisHistory = [];
 
   function getJarvisContext() {
     const today = getTodayKey();
