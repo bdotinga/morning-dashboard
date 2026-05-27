@@ -2441,7 +2441,8 @@
     localStorage.setItem(BUDGET_KEY, JSON.stringify(b));
     allBudget = b;
     if (supaUser) {
-      supa.from('budget').upsert({ user_id: supaUser.id, data: b, updated_at: new Date().toISOString() })
+      supa.from('budget')
+        .upsert({ user_id: supaUser.id, data: b, updated_at: new Date().toISOString() }, { onConflict: 'user_id' })
         .then(({ error }) => { if (error) console.error('saveBudget:', error); });
     }
   }
