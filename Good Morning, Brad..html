@@ -2116,7 +2116,15 @@
 
   // ── TASKS ─────────────────────────────────────────────────────
   function loadTasks() { try { const r = localStorage.getItem(TASK_KEY); return r ? JSON.parse(r) : {}; } catch(e) { return {}; } }
-  function saveTasks(t) { localStorage.setItem(TASK_KEY, JSON.stringify(t)); }
+  function saveTasks(t) {
+    localStorage.setItem(TASK_KEY, JSON.stringify(t));
+    allTasks = t;
+    if (supaUser) {
+      Object.entries(t).forEach(([dayKey, tasks]) => {
+        tasks.forEach(task => supaUpsertTask(dayKey, task));
+      });
+    }
+  }
 
   let allTasks = loadTasks();
 
