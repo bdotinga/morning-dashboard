@@ -1919,6 +1919,10 @@
   function showApp() {
     document.getElementById('loginScreen').classList.add('hidden');
     document.getElementById('dashboard').style.display = '';
+    // Clear localStorage so Supabase is always the source of truth
+    localStorage.removeItem('brad_tasks');
+    localStorage.removeItem('brad_revenue');
+    localStorage.removeItem('brad_calendar');
     initApp();
   }
 
