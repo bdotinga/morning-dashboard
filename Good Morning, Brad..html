@@ -2816,8 +2816,8 @@ GREETING RULES:
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-6',
-          max_tokens: 1000,
+          model: voiceMode ? 'claude-haiku-4-5-20251001' : 'claude-sonnet-4-6',
+          max_tokens: voiceMode ? 300 : 1000,
           system: getJarvisContext(),
           messages: jarvisHistory
         })
@@ -2842,8 +2842,8 @@ GREETING RULES:
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-6',
-          max_tokens: 1000,
+          model: voiceMode ? 'claude-haiku-4-5-20251001' : 'claude-sonnet-4-6',
+          max_tokens: voiceMode ? 300 : 1000,
           system: getJarvisContext(),
           messages: jarvisHistory
         })
@@ -3282,7 +3282,25 @@ GREETING RULES:
     return rec;
   }
 
+  // Safari audio unlock
+  let _audioUnlocked = false;
+  async function unlockAudio() {
+    if (_audioUnlocked) return;
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      await ctx.resume();
+      // Play silent buffer
+      const buf = ctx.createBuffer(1, 1, 22050);
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      src.connect(ctx.destination);
+      src.start(0);
+      _audioUnlocked = true;
+    } catch(e) {}
+  }
+
   async function toggleVoice() {
+    await unlockAudio();
     if (isSpeaking) {
       // Stop playback
       if (currentAudio) { currentAudio.pause(); currentAudio = null; }
@@ -3405,8 +3423,8 @@ GREETING RULES:
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-6',
-          max_tokens: 1000,
+          model: voiceMode ? 'claude-haiku-4-5-20251001' : 'claude-sonnet-4-6',
+          max_tokens: voiceMode ? 300 : 1000,
           system: getJarvisContext(),
           messages: jarvisHistory
         })
