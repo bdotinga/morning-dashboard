@@ -3282,7 +3282,7 @@ GREETING RULES:
     return rec;
   }
 
-  function toggleVoice() {
+  async function toggleVoice() {
     if (isSpeaking) {
       // Stop playback
       if (currentAudio) { currentAudio.pause(); currentAudio = null; }
@@ -3298,10 +3298,24 @@ GREETING RULES:
       setVoiceStatus('', false);
       return;
     }
-    // Start listening
+    // Start listening - request mic permission first (required for Safari)
     recognition = initSpeechRecognition();
     if (!recognition) return;
-    try { recognition.start(); } catch(e) { setVoiceStatus('Mic error — check browser permissions', false); }
+
+    // Safari requires getUserMedia to be called before SpeechRecognition
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        // Permission granted - stop the stream and start recognition
+        stream.getTracks().forEach(track => track.stop());
+        try { recognition.start(); } catch(e) { setVoiceStatus('Mic error — try again', false); }
+      } catch(err) {
+        setVoiceStatus('Mic access denied — check Safari settings', false);
+        resetVoiceBtn();
+      }
+    } else {
+      try { recognition.start(); } catch(e) { setVoiceStatus('Mic error — check browser permissions', false); }
+    }
   }
 
   function resetVoiceBtn() {
