@@ -3494,7 +3494,7 @@ GREETING RULES:
     const weekEvents = events[wk] || {};
 
     // Load calendar events from dashboard
-    const calEvents = JSON.parse(localStorage.getItem('brad_calendar') || '{}');
+    const calEvents = allCalEvents && Object.keys(allCalEvents).length > 0 ? allCalEvents : JSON.parse(localStorage.getItem('brad_calendar') || '{}');
 
     const days = [];
     for (let d = 0; d < 7; d++) {
@@ -3723,6 +3723,9 @@ GREETING RULES:
       task.dueDate = document.getElementById('tdDueDate').value || null;
       task.notes = document.getElementById('tdNotes').value.trim();
       localStorage.setItem(TASK_KEY, JSON.stringify(allT));
+      allTasks = allT;
+      // Sync to Supabase
+      if (supaUser) supaUpsertTask(tdDayKey, task);
       renderTasks();
     }
     closeTaskDetail();
