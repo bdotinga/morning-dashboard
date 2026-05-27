@@ -1335,6 +1335,22 @@
   </style>
 </head>
 <body>
+
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-logo-title">Good Morning.</div>
+      <div class="login-logo-sub">Mint Mgmt &middot; Lead.Build.Grow.</div>
+    </div>
+    <label class="login-label">Email</label>
+    <input class="login-input" type="email" id="loginEmail" placeholder="brad@mintmanagement.ca" />
+    <label class="login-label">Password</label>
+    <input class="login-input" type="password" id="loginPassword" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" onkeydown="if(event.key==='Enter') doLogin()" />
+    <button class="login-btn" onclick="doLogin()">Sign In</button>
+    <div class="login-error" id="loginError"></div>
+  </div>
+</div>
+
 <div id="dashboard" style="display:none;">
 
   <!-- HEADER -->
