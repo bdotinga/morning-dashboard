@@ -3017,7 +3017,8 @@ GREETING RULES:
     document.getElementById('calEventEndTime').selectedIndex = 0;
     document.getElementById('calEventNotes').value = '';
     renderCalendar();
-    if (calSelectedDate === date) showDayDetail(date);
+    calSelectedDate = date;
+    showDayDetail(date);
     updateCalBadge();
   }
 
