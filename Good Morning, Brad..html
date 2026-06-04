@@ -3796,6 +3796,14 @@ GREETING RULES:
 
   function openTaskDetail(taskId, dayKey) {
     console.log("openTaskDetail called:", taskId, dayKey, "allTasks keys:", Object.keys(allTasks).length);
+
+    // If allTasks hasn't loaded from Supabase yet, retry once after a short delay
+    if (!allTasks || Object.keys(allTasks).length === 0) {
+      console.log("allTasks empty — retrying in 800ms");
+      setTimeout(() => openTaskDetail(taskId, dayKey), 800);
+      return;
+    }
+
     // Search all sources for the task
     let task = null;
     let foundDayKey = dayKey;
@@ -3857,6 +3865,12 @@ GREETING RULES:
     closeTaskDetail();
     deleteTask(tdDayKey, tdTaskId);
   }
+
+  // Expose on window so inline onclick attributes always find these functions
+  window.openTaskDetail = openTaskDetail;
+  window.closeTaskDetail = closeTaskDetail;
+  window.saveTaskDetail = saveTaskDetail;
+  window.deleteTaskFromDetail = deleteTaskFromDetail;
 
   window.addEventListener('load', function() {
     document.getElementById('taskDetailOverlay').addEventListener('click', function(e) {
