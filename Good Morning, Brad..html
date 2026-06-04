@@ -3863,7 +3863,7 @@ GREETING RULES:
   function openTaskNotes(taskId, dateKey) {
     const allTasks = JSON.parse(localStorage.getItem(TASK_KEY) || '{}');
     const tasks = allTasks[dateKey] || [];
-    const task = tasks.find(t => t.id === taskId);
+    const task = tasks.find(t => t.id == taskId);
     if (!task) return;
     activeNoteTaskId = taskId;
     activeNoteDate = dateKey;
