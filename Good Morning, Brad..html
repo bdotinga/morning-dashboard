@@ -2049,8 +2049,8 @@
       localStorage.setItem(BUDGET_KEY, JSON.stringify(allBudget));
     }
 
-    // Small delay for mobile Safari DOM settlement
-    setTimeout(() => renderAll(), 100);
+    // Render after Supabase data is loaded
+    setTimeout(() => renderAll(), 200);
   }
   function renderAll() {
     renderProtocol();
@@ -2266,8 +2266,8 @@
     const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-    // Always reload fresh from localStorage
-    allTasks = loadTasks();
+    // Use in-memory allTasks (Supabase data) or fall back to localStorage
+    if (!allTasks || Object.keys(allTasks).length === 0) allTasks = loadTasks();
 
     // Collect all done tasks from all dates
     let allDone = [];
@@ -3796,7 +3796,7 @@ GREETING RULES:
   let tdDayKey = null;
 
   function openTaskDetail(taskId, dayKey) {
-    const allT = JSON.parse(localStorage.getItem(TASK_KEY) || '{}');
+    const allT = allTasks && Object.keys(allTasks).length > 0 ? allTasks : JSON.parse(localStorage.getItem(TASK_KEY) || '{}');
     const tasks = allT[dayKey] || [];
     const task = tasks.find(t => t.id === taskId);
     if (!task) return;
@@ -3817,7 +3817,7 @@ GREETING RULES:
 
   function saveTaskDetail() {
     if (!tdTaskId || !tdDayKey) return;
-    const allT = JSON.parse(localStorage.getItem(TASK_KEY) || '{}');
+    const allT = allTasks && Object.keys(allTasks).length > 0 ? allTasks : JSON.parse(localStorage.getItem(TASK_KEY) || '{}');
     const tasks = allT[tdDayKey] || [];
     const task = tasks.find(t => t.id === tdTaskId);
     if (task) {
