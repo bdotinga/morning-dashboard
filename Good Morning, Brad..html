@@ -1909,7 +1909,7 @@
       event_id: ev.id, user_id: supaUser.id, week_key: weekKey,
       day: day, slot: slot, title: ev.title, category: ev.category || 'personal',
       end_slot: ev.endSlot, notes: ev.notes || ''
-    }, { onConflict: 'event_id' });
+    });
     if (error) console.error('supaUpsertWdsEvent:', error);
   }
 
@@ -1932,7 +1932,7 @@
     const { error } = await supa.from('wds_goals').upsert({
       user_id: supaUser.id, week_key: weekKey,
       personal: goals.personal, business: goals.business
-    }, { onConflict: 'user_id,week_key' });
+    });
     if (error) console.error('supaUpsertWdsGoals:', error);
   }
 
@@ -1956,7 +1956,7 @@
       am_protocol: ritual.amProtocol || false,
       goal_setting: ritual.goalSetting || false,
       gratitude: ritual.gratitude || ['','','','','','']
-    }, { onConflict: 'user_id,day_key' });
+    });
     if (error) console.error('supaUpsertWdsRitual:', error);
   }
 
