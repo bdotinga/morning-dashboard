@@ -3795,29 +3795,36 @@ GREETING RULES:
   let tdDayKey = null;
 
   function openTaskDetail(taskId, dayKey) {
-    const allT = allTasks && Object.keys(allTasks).length > 0 ? allTasks : JSON.parse(localStorage.getItem(TASK_KEY) || '{}');
+    // Search all sources for the task
     let task = null;
     let foundDayKey = dayKey;
-    // Search in provided dayKey first
-    task = (allT[dayKey] || []).find(t => t.id == taskId);
-    // If not found, search all dayKeys (handles Supabase ID type mismatches)
-    if (!task) {
-      for (const dk of Object.keys(allT)) {
-        task = (allT[dk] || []).find(t => t.id == taskId);
-        if (task) { foundDayKey = dk; break; }
+
+    // Try allTasks first
+    const sources = [allTasks, JSON.parse(localStorage.getItem(TASK_KEY) || '{}')];
+    for (const src of sources) {
+      if (!src || !Object.keys(src).length) continue;
+      for (const dk of Object.keys(src)) {
+        const found = (src[dk] || []).find(t => String(t.id) === String(taskId));
+        if (found) { task = found; foundDayKey = dk; break; }
       }
+      if (task) break;
     }
-    if (!task) return;
-    dayKey = foundDayKey;
+
+    if (!task) {
+      console.warn('Task not found:', taskId, dayKey);
+      return;
+    }
+
     tdTaskId = task.id;
-    tdDayKey = foundDayKey || dayKey;
+    tdDayKey = foundDayKey;
     document.getElementById('tdTaskName').value = task.text || '';
     document.getElementById('tdDueDate').value = task.dueDate || '';
     document.getElementById('tdNotes').value = task.notes || '';
-    document.getElementById('taskDetailOverlay').classList.add('open');
+    const overlay = document.getElementById('taskDetailOverlay');
+    overlay.style.display = 'flex';
+    overlay.classList.add('open');
     setTimeout(() => document.getElementById('tdTaskName').focus(), 100);
   }
-
   function closeTaskDetail() {
     document.getElementById('taskDetailOverlay').classList.remove('open');
     tdTaskId = null;
