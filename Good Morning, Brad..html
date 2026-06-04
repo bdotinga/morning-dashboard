@@ -2250,11 +2250,11 @@
       const _tid = task.id;
       const _tdk = task.dayKey;
       li.innerHTML = `
-        <div class="check-box task-check" onclick="event.stopPropagation();toggleTask('${_tdk}',${_tid})"><div class="t-check-mark"></div></div>
-        <div class="task-item-text" style="cursor:pointer;" onclick="event.stopPropagation();openTaskDetail(${_tid},'${_tdk}')">${task.text}</div>
+        <div class="check-box task-check" onclick="event.stopPropagation();toggleTask('${_tdk}','${_tid}')"><div class="t-check-mark"></div></div>
+        <div class="task-item-text" style="cursor:pointer;" onclick="event.stopPropagation();openTaskDetail('${_tid}','${_tdk}')">${task.text}</div>
         ${dueBadge}
-        ${task.notes ? `<span style="color:rgba(201,168,76,0.6);font-size:13px;margin-left:6px;cursor:pointer;" onclick="event.stopPropagation();openTaskDetail(${_tid},'${_tdk}')">📝</span>` : ''}
-        <button class="item-delete task-del-btn" onclick="event.stopPropagation();deleteTask('${_tdk}',${_tid})" title="Delete">✕</button>`;
+        ${task.notes ? `<span style="color:rgba(201,168,76,0.6);font-size:13px;margin-left:6px;cursor:pointer;" onclick="event.stopPropagation();openTaskDetail('${_tid}','${_tdk}')">📝</span>` : ''}
+        <button class="item-delete task-del-btn" onclick="event.stopPropagation();deleteTask('${_tdk}','${_tid}')" title="Delete">✕</button>`;
       list.appendChild(li);
     });
     updateTaskBadge();
