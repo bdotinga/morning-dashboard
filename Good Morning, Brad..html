@@ -2165,12 +2165,12 @@
   function toggleTask(dayKey, id) {
     allTasks = loadTasks();
     const today = getTodayKey();
-    const task = (allTasks[dayKey] || []).find(t => t.id === id);
+    const task = (allTasks[dayKey] || []).find(t => t.id == id);
     if (!task) return;
     task.done = !task.done;
     // If marking done and task is from a past date, move it to today so it shows in today's list
     if (task.done && dayKey !== today) {
-      allTasks[dayKey] = (allTasks[dayKey] || []).filter(t => t.id !== id);
+      allTasks[dayKey] = (allTasks[dayKey] || []).filter(t => t.id != id);
       if (!allTasks[today]) allTasks[today] = [];
       task.completedDate = today;
       allTasks[today].push(task);
@@ -2181,7 +2181,7 @@
 
   function deleteTask(dayKey, id) {
     allTasks = loadTasks();
-    allTasks[dayKey] = (allTasks[dayKey] || []).filter(t => t.id !== id);
+    allTasks[dayKey] = (allTasks[dayKey] || []).filter(t => t.id != id);
     localStorage.setItem(TASK_KEY, JSON.stringify(allTasks));
     if (supaUser) supaDeleteTask(id);
     renderTasks();
@@ -2189,7 +2189,7 @@
 
   function editTask(dayKey, id) {
     allTasks = loadTasks();
-    const task = (allTasks[dayKey] || []).find(t => t.id === id);
+    const task = (allTasks[dayKey] || []).find(t => t.id == id);
     if (!task) return;
     const newText = prompt('Edit task:', task.text);
     if (newText === null) return;
@@ -3797,11 +3797,21 @@ GREETING RULES:
 
   function openTaskDetail(taskId, dayKey) {
     const allT = allTasks && Object.keys(allTasks).length > 0 ? allTasks : JSON.parse(localStorage.getItem(TASK_KEY) || '{}');
-    const tasks = allT[dayKey] || [];
-    const task = tasks.find(t => t.id === taskId);
+    let task = null;
+    let foundDayKey = dayKey;
+    // Search in provided dayKey first
+    task = (allT[dayKey] || []).find(t => t.id == taskId);
+    // If not found, search all dayKeys (handles Supabase ID type mismatches)
+    if (!task) {
+      for (const dk of Object.keys(allT)) {
+        task = (allT[dk] || []).find(t => t.id == taskId);
+        if (task) { foundDayKey = dk; break; }
+      }
+    }
     if (!task) return;
-    tdTaskId = taskId;
-    tdDayKey = dayKey;
+    dayKey = foundDayKey;
+    tdTaskId = task.id;
+    tdDayKey = foundDayKey || dayKey;
     document.getElementById('tdTaskName').value = task.text || '';
     document.getElementById('tdDueDate').value = task.dueDate || '';
     document.getElementById('tdNotes').value = task.notes || '';
