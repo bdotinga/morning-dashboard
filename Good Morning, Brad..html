@@ -2247,15 +2247,20 @@
       if (isDueToday) dueBadge = `<span class="due-badge">Due Today</span>`;
       else if (isOverdue) dueBadge = `<span class="due-badge" style="background:#ef4444;">Overdue</span>`;
       else if (task.dueDate && !task.done) dueBadge = `<span class="due-future">${fmtShortDate(task.dueDate)}</span>`;
+      const _tid = task.id;
+      const _tdk = task.dayKey;
       li.innerHTML = `
         <div class="check-box task-check"><div class="t-check-mark"></div></div>
-        <div class="task-item-text">${task.text}</div>
+        <div class="task-item-text" style="cursor:pointer;">${task.text}</div>
         ${dueBadge}
-        ${task.notes ? '<span style="color:rgba(201,168,76,0.5);font-size:11px;margin-left:4px;" title="Has notes">●</span>' : ''}
+        ${task.notes ? '<span style="color:rgba(201,168,76,0.6);font-size:13px;margin-left:6px;cursor:pointer;" title="Has notes">📝</span>' : ''}
         <button class="item-delete task-del-btn" title="Delete">✕</button>`;
-      li.querySelector('.task-check').addEventListener('click', (e) => { e.stopPropagation(); toggleTask(task.dayKey, task.id); });
-      li.querySelector('.task-del-btn').addEventListener('click', (e) => { e.stopPropagation(); deleteTask(task.dayKey, task.id); });
-      li.addEventListener('click', () => openTaskDetail(task.id, task.dayKey));
+      li.querySelector('.task-check').addEventListener('click', (e) => { e.stopPropagation(); toggleTask(_tdk, _tid); });
+      li.querySelector('.task-del-btn').addEventListener('click', (e) => { e.stopPropagation(); deleteTask(_tdk, _tid); });
+      li.querySelector('.task-item-text').addEventListener('click', (e) => { e.stopPropagation(); openTaskDetail(_tid, _tdk); });
+      if (li.querySelector('span[title="Has notes"]')) {
+        li.querySelector('span[title="Has notes"]').addEventListener('click', (e) => { e.stopPropagation(); openTaskDetail(_tid, _tdk); });
+      }
       list.appendChild(li);
     });
     updateTaskBadge();
