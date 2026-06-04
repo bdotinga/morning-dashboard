@@ -3806,9 +3806,11 @@ GREETING RULES:
   });
 
   // ── MOVE MODALS TO BODY (fixes Safari position:fixed inside hidden parents) ──
-  ['taskDetailOverlay','taskNotesOverlay','calEditOverlay','wdsEventModal'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el && el.parentElement !== document.body) document.body.appendChild(el);
+  document.addEventListener('DOMContentLoaded', function() {
+    ['taskDetailOverlay','taskNotesOverlay','calEditOverlay','wdsEventModal'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.parentElement !== document.body) document.body.appendChild(el);
+    });
   });
 
   // ── INIT ──────────────────────────────────────────────────────
