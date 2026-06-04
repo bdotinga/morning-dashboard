@@ -3424,7 +3424,9 @@ GREETING RULES:
   }
 
   function wdsWeekKey(ws) {
-    return ws.toISOString().slice(0,10);
+    // Use local date to avoid UTC offset shifting the week key
+    const d = new Date(ws);
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
   }
 
   function wdsFormatWeekLabel(ws) {
