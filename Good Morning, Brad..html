@@ -1888,18 +1888,93 @@
     }
   }
 
+  async function supaLoadWdsEvents() {
+    const { data, error } = await supa.from('wds_events').select('*').eq('user_id', supaUser.id);
+    if (error) { console.error('supaLoadWdsEvents:', error); return null; }
+    const result = {};
+    data.forEach(r => {
+      if (!result[r.week_key]) result[r.week_key] = {};
+      if (!result[r.week_key][r.day]) result[r.week_key][r.day] = {};
+      if (!result[r.week_key][r.day][r.slot]) result[r.week_key][r.day][r.slot] = [];
+      result[r.week_key][r.day][r.slot].push({
+        id: r.event_id, title: r.title, category: r.category || 'personal',
+        endSlot: r.end_slot, notes: r.notes || ''
+      });
+    });
+    return result;
+  }
+
+  async function supaUpsertWdsEvent(weekKey, day, slot, ev) {
+    const { error } = await supa.from('wds_events').upsert({
+      event_id: ev.id, user_id: supaUser.id, week_key: weekKey,
+      day: day, slot: slot, title: ev.title, category: ev.category || 'personal',
+      end_slot: ev.endSlot, notes: ev.notes || ''
+    }, { onConflict: 'event_id' });
+    if (error) console.error('supaUpsertWdsEvent:', error);
+  }
+
+  async function supaDeleteWdsEvent(eventId) {
+    const { error } = await supa.from('wds_events').delete().eq('event_id', eventId).eq('user_id', supaUser.id);
+    if (error) console.error('supaDeleteWdsEvent:', error);
+  }
+
+  async function supaLoadWdsGoals() {
+    const { data, error } = await supa.from('wds_goals').select('*').eq('user_id', supaUser.id);
+    if (error) { console.error('supaLoadWdsGoals:', error); return null; }
+    const result = {};
+    data.forEach(r => {
+      result[r.week_key] = { personal: r.personal || ['','',''], business: r.business || ['','',''] };
+    });
+    return result;
+  }
+
+  async function supaUpsertWdsGoals(weekKey, goals) {
+    const { error } = await supa.from('wds_goals').upsert({
+      user_id: supaUser.id, week_key: weekKey,
+      personal: goals.personal, business: goals.business
+    }, { onConflict: 'user_id,week_key' });
+    if (error) console.error('supaUpsertWdsGoals:', error);
+  }
+
+  async function supaLoadWdsRituals() {
+    const { data, error } = await supa.from('wds_rituals').select('*').eq('user_id', supaUser.id);
+    if (error) { console.error('supaLoadWdsRituals:', error); return null; }
+    const result = {};
+    data.forEach(r => {
+      result[r.day_key] = {
+        amProtocol: r.am_protocol || false,
+        goalSetting: r.goal_setting || false,
+        gratitude: r.gratitude || ['','','','','','']
+      };
+    });
+    return result;
+  }
+
+  async function supaUpsertWdsRitual(dayKey, ritual) {
+    const { error } = await supa.from('wds_rituals').upsert({
+      user_id: supaUser.id, day_key: dayKey,
+      am_protocol: ritual.amProtocol || false,
+      goal_setting: ritual.goalSetting || false,
+      gratitude: ritual.gratitude || ['','','','','','']
+    }, { onConflict: 'user_id,day_key' });
+    if (error) console.error('supaUpsertWdsRitual:', error);
+  }
+
   async function initApp() {
     // Load all data from Supabase with 8 second timeout
     const withTimeout = (promise, ms) => Promise.race([
       promise,
       new Promise(resolve => setTimeout(() => resolve(null), ms))
     ]);
-    const [tasks, revenue, calendar, memory, budgetRow] = await Promise.all([
+    const [tasks, revenue, calendar, memory, budgetRow, wdsEvents, wdsGoals, wdsRituals] = await Promise.all([
       withTimeout(supaLoadTasks(), 8000),
       withTimeout(supaLoadRevenue(), 8000),
       withTimeout(supaLoadCalendar(), 8000),
       withTimeout(supaLoadJarvisMemory(), 8000),
-      withTimeout(supa.from('budget').select('data').eq('user_id', supaUser.id).single().then(r => r.data?.data || null), 8000)
+      withTimeout(supa.from('budget').select('data').eq('user_id', supaUser.id).single().then(r => r.data?.data || null), 8000),
+      withTimeout(supaLoadWdsEvents(), 8000),
+      withTimeout(supaLoadWdsGoals(), 8000),
+      withTimeout(supaLoadWdsRituals(), 8000)
     ]);
 
     // Load from Supabase - no seeding
@@ -1926,6 +2001,18 @@
     if (budgetRow) {
       allBudget = budgetRow;
       localStorage.setItem(BUDGET_KEY, JSON.stringify(allBudget));
+    }
+
+    if (wdsEvents !== null) {
+      localStorage.setItem(WDS_KEY, JSON.stringify(wdsEvents));
+    }
+
+    if (wdsGoals !== null) {
+      localStorage.setItem(WDS_GOALS_KEY, JSON.stringify(wdsGoals));
+    }
+
+    if (wdsRituals !== null) {
+      localStorage.setItem(WDS_RITUALS_KEY, JSON.stringify(wdsRituals));
     }
 
     // Render after Supabase data is loaded
@@ -3323,6 +3410,7 @@ GREETING RULES:
     if (!goals[wk]) goals[wk] = { personal: ['','',''], business: ['','',''] };
     goals[wk][input.dataset.type][parseInt(input.dataset.idx)] = input.value;
     localStorage.setItem(WDS_GOALS_KEY, JSON.stringify(goals));
+    if (supa && supaUser) supaUpsertWdsGoals(wk, goals[wk]);
   }
 
   function wdsRenderRituals() {
@@ -3386,6 +3474,7 @@ GREETING RULES:
     if (!rituals[dk]) rituals[dk] = { amProtocol: false, goalSetting: false, gratitude: ['','','','','',''] };
     rituals[dk][field] = value;
     localStorage.setItem(WDS_RITUALS_KEY, JSON.stringify(rituals));
+    if (supa && supaUser) supaUpsertWdsRitual(dk, rituals[dk]);
   }
 
   function wdsSaveGratitude(dk, idx, value) {
@@ -3394,6 +3483,7 @@ GREETING RULES:
     if (!rituals[dk].gratitude) rituals[dk].gratitude = ['','','','','',''];
     rituals[dk].gratitude[idx] = value;
     localStorage.setItem(WDS_RITUALS_KEY, JSON.stringify(rituals));
+    if (supa && supaUser) supaUpsertWdsRitual(dk, rituals[dk]);
   }
 
   // ── WEEKLY DESIGN SYSTEM ──────────────────────────────────────
@@ -3641,6 +3731,7 @@ GREETING RULES:
     }
 
     wdsSaveEvents(events);
+    if (supa && supaUser) supaUpsertWdsEvent(wk, day, slot, ev);
     wdsCloseEventModal();
     wdsRenderCalendar();
   }
@@ -3654,6 +3745,7 @@ GREETING RULES:
       events[wk][day][slot] = events[wk][day][slot].filter(e => e.id !== wdsEditingEventId);
     }
     wdsSaveEvents(events);
+    if (supa && supaUser) supaDeleteWdsEvent(wdsEditingEventId);
     wdsCloseEventModal();
     wdsRenderCalendar();
   }
