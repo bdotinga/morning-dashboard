@@ -1894,9 +1894,9 @@
     const result = {};
     data.forEach(r => {
       if (!result[r.week_key]) result[r.week_key] = {};
-      if (!result[r.week_key][r.day]) result[r.week_key][r.day] = {};
-      if (!result[r.week_key][r.day][r.slot]) result[r.week_key][r.day][r.slot] = [];
-      result[r.week_key][r.day][r.slot].push({
+      if (!result[r.week_key][r.day_col]) result[r.week_key][r.day_col] = {};
+      if (!result[r.week_key][r.day_col][r.slot]) result[r.week_key][r.day_col][r.slot] = [];
+      result[r.week_key][r.day_col][r.slot].push({
         id: r.event_id, title: r.title, category: r.category || 'personal',
         endSlot: r.end_slot, notes: r.notes || ''
       });
@@ -1907,7 +1907,7 @@
   async function supaUpsertWdsEvent(weekKey, day, slot, ev) {
     const { error } = await supa.from('wds_events').upsert({
       event_id: ev.id, user_id: supaUser.id, week_key: weekKey,
-      day: day, slot: slot, title: ev.title, category: ev.category || 'personal',
+      day_col: day, slot: slot, title: ev.title, category: ev.category || 'personal',
       end_slot: ev.endSlot, notes: ev.notes || ''
     });
     if (error) console.error('supaUpsertWdsEvent:', error);
