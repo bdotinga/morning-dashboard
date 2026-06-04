@@ -3795,6 +3795,7 @@ GREETING RULES:
   let tdDayKey = null;
 
   function openTaskDetail(taskId, dayKey) {
+    console.log("openTaskDetail called:", taskId, dayKey, "allTasks keys:", Object.keys(allTasks).length);
     // Search all sources for the task
     let task = null;
     let foundDayKey = dayKey;
@@ -3826,7 +3827,9 @@ GREETING RULES:
     setTimeout(() => document.getElementById('tdTaskName').focus(), 100);
   }
   function closeTaskDetail() {
-    document.getElementById('taskDetailOverlay').classList.remove('open');
+    const _ov = document.getElementById('taskDetailOverlay');
+    _ov.classList.remove('open');
+    _ov.style.display = 'none';
     tdTaskId = null;
     tdDayKey = null;
   }
