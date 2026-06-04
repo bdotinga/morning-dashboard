@@ -3297,7 +3297,8 @@ GREETING RULES:
   const WDS_RITUALS_KEY = 'brads-wds-rituals';
 
   function wdsDayKey(weekStart, d) {
-    const dt = new Date(weekStart.getFullYear(), weekStart.getMonth(), weekStart.getDate() + d);
+    const dt = new Date(weekStart);
+    dt.setDate(dt.getDate() + d);
     return dt.getFullYear() + '-' + String(dt.getMonth()+1).padStart(2,'0') + '-' + String(dt.getDate()).padStart(2,'0');
   }
 
